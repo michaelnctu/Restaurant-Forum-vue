@@ -15,7 +15,7 @@ const routes = [
   },
   {
     path: '/signin',
-    name: 'sign-  in',
+    name: 'sign-in',
     component: SignIn
 
   },
@@ -53,9 +53,9 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
+  linkExactActiveClass: 'active',
   routes
+
 })
 
 export default router
