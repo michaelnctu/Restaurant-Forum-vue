@@ -30,12 +30,12 @@ const routes = [
     component: Restaurants
   },
   {
-    path: '/resturants/feeds',
+    path: '/restaurants/feeds',
     name: 'resturants-feeds',
     component: () => import('../views/RestaurantsFeeds.vue')
   },
   {
-    path: '/resturants/top',
+    path: '/restaurants/top',
     name: 'resturants-top',
     component: () => import('../views/RestaurantsTop.vue')
   },
@@ -53,7 +53,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  linkExactActiveClass: 'active',
+  linkExactActiveClass: 'active',  //如果完全匹配則加上active
   routes
 
 })
