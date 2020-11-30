@@ -3,6 +3,7 @@
   <div class="container py-5">
     <NavTabs />
     <!-- 餐廳類別標籤 RestaurantsNavPills -->
+    <RestaurantsNavPills :categories="categories" />
 
     <Navbar />
 
@@ -24,6 +25,7 @@
 import NavTabs from "./../components/NavTabs";
 import RestaurantCard from "./../components/RestaurantCard";
 import Navbar from "./../components/Navbar";
+import RestaurantsNavPills from "./../components/RestaurantsNavPills";
 
 const dummyData = {
   restaurants: [
@@ -305,6 +307,7 @@ export default {
     NavTabs,
     RestaurantCard,
     Navbar,
+    RestaurantsNavPills,
   },
   data() {
     //vue的資料物件
