@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import notFound from '../views/notFound.vue'
-import SignIn from '../views/Signin.vue'
+// import SignIn from '../views/Signin.vue'
 import Restaurants from '../views/Restaurants.vue'
 
 Vue.use(VueRouter)
@@ -13,17 +13,17 @@ const routes = [
     redirect: '/restaurants'
 
   },
-  {
-    path: '/signin',
-    name: 'sign-in',
-    component: SignIn
+  // {
+  //   path: '/signin',
+  //   name: 'sign-in',
+  //   component: SignIn
 
-  },
-  {
-    path: '/signup',
-    name: 'sign-up',
-    component: () => import('../views/Signup.vue')
-  },
+  // },
+  // {
+  //   path: '/signup',
+  //   name: 'sign-up',
+  //   component: () => import('../views/Signup.vue')
+  // },
   {
     path: '/restaurants',
     name: 'restaurants',

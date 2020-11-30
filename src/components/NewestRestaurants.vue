@@ -2,22 +2,18 @@
   <div class="card">
     <div class="card-header">最新餐廳</div>
     <div class="card-body">
-      <!-- v for 為一個迴圈 -->
-      <div v-for="restaurant in restaurants" :key="restaurant.id"
-      >
-      <div>
+      <div v-for="restaurant in restaurants" :key="restaurant.id">
         <h4>
-          <a href="#">{{restaurant.name}}}</a>
-          <small>{{restuarant.Category ? restaurant.Category.name: '未分類'
-            }}</small>
+          <a href="#">{{ restaurant.name }}</a>
+          &nbsp;
+          <small>{{
+            restaurant.Category ? restaurant.Category.name : "未分類"
+          }}</small>
         </h4>
-        <p>
-          {{restaurant.description}}
-        </p>
-        {{restaurant.createdAt | fromNow}}
+        <p>{{ restaurant.description }}</p>
+        {{ restaurant.createdAt | fromNow }}
         <hr />
       </div>
-
     </div>
   </div>
 </template>

@@ -1,19 +1,19 @@
 <template>
   <div class="container py-5">
     <NavTabs />
-
+    <Navbar />
     <h1 class="mt-5">最新動態</h1>
     <hr />
     <div class="row">
       <div class="col-md-6">
         <h3>最新餐廳</h3>
         <!-- 最新餐廳 NewestRestaurants -->
-        <NewestRestaurants v-bind: restaurants="restaurants" />
+        <NewestRestaurants v-bind:restaurants="restaurants" />
       </div>
       <div class="col-md-6">
         <!-- 最新評論 NewestComments-->
         <h3>最新評論</h3>
-        <NewestComments v-bind: restaurants="restaurants /">
+        <NewestComments v-bind:comments="comments" />
       </div>
     </div>
   </div>
@@ -21,6 +21,7 @@
 
 <script>
 import NavTabs from "./../components/NavTabs";
+import Navbar from "./../components/Navbar";
 import NewestRestaurants from "./../components/NewestRestaurants";
 import NewestComments from "./../components/NewestComments";
 const dummyData = {
@@ -574,9 +575,10 @@ const dummyData = {
 
 export default {
   components: {
+    Navbar,
     NavTabs,
     NewestRestaurants,
-    NewComments,
+    NewestComments,
   },
   data() {
     return {
@@ -585,14 +587,17 @@ export default {
     };
   },
   created() {
+    //created:在模板渲染成html前呼叫，即通常初始化某些屬性值，然後再渲染成檢視。
     this.fetchFeeds();
   },
   methods: {
     fetchFeeds() {
       //fetech API
-      const { restuants, comments } = dummyData;
+      const { restaurants, comments } = dummyData;
       this.restaurants = restaurants;
-      this.comments = comments.filter((comment) => comment.Restaurant);
+      this.comments = comments.filter(
+        (comment) => comment.Restaurant && comment.text
+      );
     },
   },
 };
