@@ -18,6 +18,12 @@
     </div>
 
     <!-- 分頁標籤 RestaurantPagination -->
+    <RestaurantPagination
+      :currentPage="currentPage"
+      :total-page="totalPage"
+      :previous-page="previousPage"
+      :next-page="nextPage"
+    />
   </div>
 </template>
 
@@ -26,6 +32,7 @@ import NavTabs from "./../components/NavTabs";
 import RestaurantCard from "./../components/RestaurantCard";
 import Navbar from "./../components/Navbar";
 import RestaurantsNavPills from "./../components/RestaurantsNavPills";
+import RestaurantPagination from "./../components/RestaurantPagination";
 
 const dummyData = {
   restaurants: [
@@ -308,6 +315,7 @@ export default {
     RestaurantCard,
     Navbar,
     RestaurantsNavPills,
+    RestaurantPagination,
   },
   data() {
     //vue的資料物件
@@ -332,6 +340,8 @@ export default {
         categoryId,
         page,
         totalPage,
+        prev,
+        next,
       } = dummyData;
       this.restaurants = restaurants; //this 指向 vm例項
       this.currentPage = currentPage;
@@ -339,6 +349,8 @@ export default {
       this.categoryId = categoryId;
       this.currentPage = page;
       this.totalPage = totalPage;
+      this.previousPage = prev;
+      this.nextPage = next;
     },
   },
 };
