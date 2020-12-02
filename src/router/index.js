@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import notFound from '../views/notFound.vue'
-// import SignIn from '../views/Signin.vue'
+import Signin from '../views/Signin.vue'
 import Restaurants from '../views/Restaurants.vue'
 
 Vue.use(VueRouter)
@@ -11,23 +11,27 @@ const routes = [
     path: '/',
     name: 'root',
     redirect: '/restaurants'
+  },
+  {
+    path: '/signin',
+    name: 'sign-in',
+    component: Signin
 
   },
-  // {
-  //   path: '/signin',
-  //   name: 'sign-in',
-  //   component: SignIn
-
-  // },
-  // {
-  //   path: '/signup',
-  //   name: 'sign-up',
-  //   component: () => import('../views/Signup.vue')
-  // },
+  {
+    path: '/signup',
+    name: 'sign-up',
+    component: () => import('../views/Signup.vue')
+  },
   {
     path: '/restaurants',
     name: 'restaurants',
     component: Restaurants
+  },
+  {
+    path: '/restaurants/:id',
+    name: 'restaurant',
+    component: () => import('../views/RestaurantsTop.vue')
   },
   {
     path: '/restaurants/feeds',
