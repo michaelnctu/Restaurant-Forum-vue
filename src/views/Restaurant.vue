@@ -3,6 +3,8 @@
   <div class="container py-5">
     <h1>餐廳描述頁</h1>
     <!-- 餐廳資訊頁 RestaurantDetail -->
+    <RestaurantDetail :restdetailProp="restaurant" />
+
     <hr />
     <!-- 餐廳評論 RestaurantComments -->
     <!-- 新增評論 CreateComment -->
@@ -13,6 +15,7 @@
 
 <script>
 import RestaurantComments from "./../components/RestaurantComments";
+import RestaurantDetail from "./../components/RestaurantDetail";
 
 const dummyData = {
   restaurant: {
@@ -82,6 +85,7 @@ const dummyData = {
 export default {
   components: {
     RestaurantComments,
+    RestaurantDetail,
   },
   data() {
     return {

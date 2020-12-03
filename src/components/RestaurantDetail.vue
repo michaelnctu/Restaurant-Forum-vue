@@ -47,40 +47,9 @@
 <script>
 export default {
   props: {
-    initialRestaurant: {
-      type: Object,
+    restdetailProp: {
+      type: Array,
       required: true,
-    },
-  },
-  data() {
-    return {
-      restaurant: this.initialRestaurant,
-    };
-  },
-  methods: {
-    addFavorite() {
-      this.restaurant = {
-        ...this.restaurant, // 保留餐廳內原有資料
-        isFavorited: true,
-      };
-    },
-    deleteFavorite() {
-      this.restaurant = {
-        ...this.restaurant, // 保留餐廳內原有資料
-        isFavorited: false,
-      };
-    },
-    addLike() {
-      this.restaurant = {
-        ...this.restaurant,
-        isLiked: true,
-      };
-    },
-    deleteLike() {
-      this.restaurant = {
-        ...this.restaurant,
-        isLiked: false,
-      };
     },
   },
 };
