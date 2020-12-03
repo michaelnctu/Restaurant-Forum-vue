@@ -1,4 +1,4 @@
-// ./src/views/Restaurant.vue
+
 <template>
   <div class="container py-5">
     <h1>餐廳描述頁</h1>
@@ -9,7 +9,10 @@
     <!-- 餐廳評論 RestaurantComments -->
     <!-- 新增評論 CreateComment -->
     <!-- RestaurantComments是components rest-comments屬性 restaurantComments下方sript中data內的值 -->
-    <RestaurantComments :restcommentsProp="restaurantCommentsMethod" />
+    <RestaurantComments
+      :restcommentsProp="restaurantCommentsMethod"
+      @after-delete-comment="afterDeleteComment"
+    />
   </div>
 </template>
 
@@ -82,6 +85,17 @@ const dummyData = {
   isLiked: false,
 };
 
+const dummyUser = {
+  currentUser: {
+    id: 1,
+    name: "管理者",
+    email: "root@example.com",
+    image: "https://i.pravatar.cc/300",
+    isAdmin: true,
+  },
+  isAuthenticated: true,
+};
+
 export default {
   components: {
     RestaurantComments,
@@ -89,6 +103,7 @@ export default {
   },
   data() {
     return {
+      currentUser: dummyUser.currentUser,
       restaurant: {
         id: -1,
         name: "",
@@ -126,6 +141,9 @@ export default {
       };
 
       this.restaurantCommentsMethod = dummyData.restaurant.Comments;
+    },
+    afterDeleteComment(commentId) {
+      console.log("afterDeleteComment", commentId);
     },
   },
 };
