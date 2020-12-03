@@ -3,7 +3,7 @@
   <div class="container py-5">
     <NavTabs />
     <!-- 餐廳類別標籤 RestaurantsNavPills -->
-    <RestaurantsNavPills :categories="categories" />
+    <RestaurantsNavPills :cate="categories" />
 
     <Navbar />
 

@@ -31,3 +31,47 @@
     </div>
   </nav>
 </template>
+
+<script>
+// ./src/components/Navbar.vue
+// seed data
+const dummyUser = {
+  currentUser: {
+    id: 1,
+    name: "管理者",
+    email: "root@example.com",
+    image: "https://i.pravatar.cc/300",
+    isAdmin: true,
+  },
+  isAuthenticated: true,
+};
+
+export default {
+  // Vue 會在沒有資料時使用此預設值
+  data() {
+    return {
+      currentUser: {
+        id: -1,
+        name: "",
+        email: "",
+        image: "",
+        isAdmin: false,
+      },
+      isAuthenticated: false,
+    };
+  },
+  created() {
+    this.fetchUser();
+  },
+  methods: {
+    //透過 fetchUser 來模擬「把 dummyUser 蓋過 currentUser」的動作
+    fetchUser() {
+      this.currentUser = {
+        ...this.currentUser,
+        ...dummyUser.currentUser,
+      };
+      this.isAuthenticated = dummyUser.isAuthenticated;
+    },
+  },
+};
+</script>

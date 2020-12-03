@@ -60,6 +60,7 @@
 <script>
 export default {
   props: {
+    //from 父層來的
     initialRestaurant: {
       type: Object,
       required: true,

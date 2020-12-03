@@ -6,10 +6,14 @@
     <hr />
     <!-- 餐廳評論 RestaurantComments -->
     <!-- 新增評論 CreateComment -->
+    <!-- RestaurantComments是components rest-comments屬性 restaurantComments下方sript中data內的值 -->
+    <RestaurantComments :restcommentsProp="restaurantCommentsMethod" />
   </div>
 </template>
 
 <script>
+import RestaurantComments from "./../components/RestaurantComments";
+
 const dummyData = {
   restaurant: {
     id: 1,
@@ -33,7 +37,26 @@ const dummyData = {
     Comments: [
       {
         id: 3,
-        text: "Quos asperiores in nostrum cupiditate excepturi aspernatur.",
+        text: "I wanna know 你型不行",
+        UserId: 2,
+        RestaurantId: 1,
+        createdAt: "2019-06-22T09:00:43.000Z",
+        updatedAt: "2019-06-22T09:00:43.000Z",
+        User: {
+          id: 2,
+          name: "user1",
+          email: "user1@example.com",
+          password:
+            "$2a$10$0ISHJI48xu/VRNVmEeycFe8v5ChyT305f8KaJVIhumu7M/eKAikkm",
+          image: "https://i.imgur.com/XooCt5K.png",
+          isAdmin: false,
+          createdAt: "2019-06-22T09:00:43.000Z",
+          updatedAt: "2019-06-23T01:16:31.000Z",
+        },
+      },
+      {
+        id: 4,
+        text: "u gotta know 別懷疑你自己的能力",
         UserId: 2,
         RestaurantId: 1,
         createdAt: "2019-06-22T09:00:43.000Z",
@@ -57,6 +80,9 @@ const dummyData = {
 };
 
 export default {
+  components: {
+    RestaurantComments,
+  },
   data() {
     return {
       restaurant: {
@@ -75,7 +101,7 @@ export default {
     };
   },
   created() {
-    const { id: restaurantId } = this.$route.params;
+    const { id: restaurantId } = this.$route.params; //拿params
     this.fetchRestaurant(restaurantId);
   },
   methods: {
@@ -95,7 +121,7 @@ export default {
         isLiked: dummyData.isLiked,
       };
 
-      this.restaurantComments = dummyData.restaurant.Comments;
+      this.restaurantCommentsMethod = dummyData.restaurant.Comments;
     },
   },
 };

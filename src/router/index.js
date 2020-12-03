@@ -31,7 +31,7 @@ const routes = [
   {
     path: '/restaurants/:id',
     name: 'restaurant',
-    component: () => import('../views/RestaurantsTop.vue')
+    component: () => import('../views/Restaurant.vue')
   },
   {
     path: '/restaurants/feeds',

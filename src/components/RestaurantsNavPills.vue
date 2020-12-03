@@ -20,7 +20,8 @@
 <script>
 export default {
   props: {
-    categories: {
+    //從父層  接收到的資訊
+    cate: {
       type: Array,
       required: true,
     },
