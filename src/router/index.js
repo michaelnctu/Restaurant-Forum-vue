@@ -24,6 +24,16 @@ const routes = [
     component: () => import('../views/Signup.vue')
   },
   {
+    path: '/admin',
+    exact: true, //路由需要完全對應對照
+    redirect: '/admin/restaurants'
+  },
+  {
+    path: '/admin/restaurants',
+    name: 'admin-restaurants',
+    component: () => import('../views/AdminRestaurants.vue')
+  },
+  {
     path: '/restaurants',
     name: 'restaurants',
     component: Restaurants

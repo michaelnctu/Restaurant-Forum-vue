@@ -8,17 +8,21 @@
     <hr />
     <!-- 餐廳評論 RestaurantComments -->
     <!-- 新增評論 CreateComment -->
-    <!-- RestaurantComments是components rest-comments屬性 restaurantComments下方sript中data內的值 -->
+
+    <!-- RestaurantComments是compone  nts rest-comments屬性 restaurantComments下方sript中data內的值 -->
     <RestaurantComments
       :restcommentsProp="restaurantCommentsMethod"
       @after-delete-comment="afterDeleteComment"
     />
+
+    <CreateComment />
   </div>
 </template>
 
 <script>
 import RestaurantComments from "./../components/RestaurantComments";
 import RestaurantDetail from "./../components/RestaurantDetail";
+import CreateComment from "./../components/CreateComment";
 
 const dummyData = {
   restaurant: {
@@ -100,6 +104,7 @@ export default {
   components: {
     RestaurantComments,
     RestaurantDetail,
+    CreateComment,
   },
   data() {
     return {
