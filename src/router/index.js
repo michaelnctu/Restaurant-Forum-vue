@@ -39,6 +39,11 @@ const routes = [
     component: Restaurants
   },
   {
+    path: '/admin/restaurants/new',
+    name: 'admin-restaurants-new',
+    component: () => import('../views/AdminRestaurantNew.vue')
+  },
+  {
     path: '/restaurants/:id',
     name: 'restaurant',
     component: () => import('../views/Restaurant.vue')
