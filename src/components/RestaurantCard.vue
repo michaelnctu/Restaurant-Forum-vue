@@ -62,7 +62,7 @@ export default {
   props: {
     //from 父層來的
     initialRestaurant: {
-      type: Object,
+      type: Array,
       required: true,
     },
   },

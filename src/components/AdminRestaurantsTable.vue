@@ -18,7 +18,18 @@
         <td class="d-flex justify-content-between">
           <a href="#" class="btn btn-link">Show</a>
 
-          <a href="#" class="btn btn-link">Edit</a>
+          <router-link
+            :to="{
+              name: 'admin-restaurant-edit',
+              params: {
+                id: restaurant.id,
+              },
+              s,
+            }"
+            class="btn btn-link"
+          >
+            Edit</router-link
+          >
 
           <button
             @click.stop.prevent="deleteRestaurant(restaurant.id)"
