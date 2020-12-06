@@ -1,8 +1,7 @@
-
 <template>
   <div class="container py-5">
     <AdminRestaurantForm
-      :initialRestaurant="restaurant"
+      :initial-restaurant="restaurant"
       @after-submit="handleAfterSubmit"
     />
   </div>
@@ -49,7 +48,7 @@ export default {
         address: "",
         description: "",
         image: "",
-        openingHours: "",
+        opening_hours: "",
       },
     };
   },
@@ -68,7 +67,7 @@ export default {
         tel,
         categoryId,
         address,
-        openingHours,
+        opening_hours,
         description,
         image,
       } = restaurant;
@@ -81,7 +80,7 @@ export default {
         address,
         description,
         image,
-        openingHours,
+        opening_hours,
       };
     },
     handleAfterSubmit(formData) {

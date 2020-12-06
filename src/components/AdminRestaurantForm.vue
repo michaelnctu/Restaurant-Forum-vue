@@ -3,12 +3,13 @@
     <div class="form-group">
       <label for="name">Name</label>
       <input
+        v-model="restaurant.name"
         id="name"
         type="text"
         class="form-control"
         name="name"
         placeholder="Enter name"
-        equired
+        required
       />
     </div>
 
@@ -29,6 +30,7 @@
     <div class="form-group">
       <label for="tel">Tel</label>
       <input
+        v-model="restaurant.tel"
         id="tel"
         type="text"
         class="form-control"
@@ -40,6 +42,7 @@
     <div class="form-group">
       <label for="address">Address</label>
       <input
+        v-model="restaurant.address"
         id="address"
         type="text"
         class="form-control"
@@ -51,6 +54,7 @@
     <div class="form-group">
       <label for="opening-hours">Opening Hours</label>
       <input
+        v-model="restaurant.opening_hours"
         id="opening-hours"
         type="time"
         class="form-control"
@@ -61,6 +65,7 @@
     <div class="form-group">
       <label for="description">Description</label>
       <textarea
+        v-model="restaurant.description"
         id="description"
         class="form-control"
         rows="3"
@@ -127,17 +132,15 @@ export default {
   props: {
     initialRestaurant: {
       type: Object,
-      default: () => {
-        return {
-          name: "",
-          categoryId: "",
-          tel: "",
-          address: "",
-          description: "",
-          image: "",
-          openingHours: "",
-        };
-      },
+      default: () => ({
+        name: "",
+        categoryId: "",
+        tel: "",
+        address: "",
+        description: "",
+        image: "",
+        openingHours: "",
+      }),
     },
   },
   data() {
