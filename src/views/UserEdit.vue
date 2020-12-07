@@ -69,6 +69,7 @@ export default {
         image: "",
         isAdmin: 1,
       },
+      hey: "",
     };
   },
   created() {
@@ -79,6 +80,7 @@ export default {
   methods: {
     fetchUser(currentUserId) {
       console.log("user的id是", currentUserId);
+      console.log("這是", this);
       const { currentUser } = dummyUser;
       const { image, name } = currentUser;
 
@@ -89,14 +91,13 @@ export default {
       };
     },
     handleFileChange(e) {
-      console.log("this", this);
       const { files } = e.target;
-      console.log("files", files);
       if (files.length === 0) {
         this.currentUser.image = "";
       } else {
         const imageURL = window.URL.createObjectURL(files[0]);
-        this.currentUser.image = imageURL;
+        this.currentimage = imageURL;
+        console.log("差別", imageURL);
       }
     },
     handleAfterSubmit(e) {

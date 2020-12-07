@@ -167,7 +167,9 @@ export default {
       } else {
         //產生預覽圖
         const imageURL = window.URL.createObjectURL(files[0]); //暫時產生圖片網址
+
         this.restaurant.image = imageURL;
+        console.log("差別", this.restaurant.image);
       }
     },
     handleSubmit(e) {
