@@ -29,6 +29,11 @@ const routes = [
     redirect: '/admin/restaurants'
   },
   {
+    path: '/admin/users',
+    name: 'admin-users',
+    component: () => import('../views/AdminUsers.vue')
+  },
+  {
     path: '/admin/restaurants',
     name: 'admin-restaurants',
     component: () => import('../views/AdminRestaurants.vue')

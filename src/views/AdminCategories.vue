@@ -38,52 +38,38 @@
           <th scope="row">
             {{ category.id }}
           </th>
-
+          <td class="position-relative"></td>
           <td class="position-relative">
             <div v-show="!category.isEditing" class="category-name">
               {{ category.name }}
             </div>
-          </td>
-          <td class="d-flex justify-content-between">
             <input
               v-show="category.isEditing"
               v-model="category.name"
               type="text"
               class="form-control"
             />
-
-            <span
-              @click.stop.prevent="handleCancel"
-              v-show="category.isEditing"
-              class="cancel"
-            >
-              ✕
-            </span>
-
+            <span v-show="category.isEditing" class="cancel"> ✕ </span>
+          </td>
+          <td class="d-flex justify-content-between">
             <button
               v-show="!category.isEditing"
               type="button"
               class="btn btn-link mr-2"
-              @click.stop.prevent="toggleisEditing(category.id)"
             >
               Edit
             </button>
-
             <button
               v-show="category.isEditing"
               type="button"
               class="btn btn-link mr-2"
-              @click.stop.prevent="
-                updateCategory({ categoryId: category.id, name: category.name })
-              "
             >
               Save
             </button>
-
             <button
-              @click.stop.prevent="deleteCategories(category.id)"
               type="button"
               class="btn btn-link mr-2"
+              @click.stop.prevent="deleteCategory(category.id)"
             >
               Delete
             </button>
@@ -163,7 +149,10 @@ export default {
         (category) => category.id !== categoryId
       );
     },
-    updateCategory({ categoryId, name }) {
+    // updateCategory({ categoryId, name }) {
+    //   this.toggleisEditing(categoryId);
+    // },
+    updateCategory({ categoryId }) {
       this.toggleisEditing(categoryId);
     },
 
