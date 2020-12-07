@@ -38,13 +38,48 @@
           <th scope="row">
             {{ category.id }}
           </th>
+
           <td class="position-relative">
-            <div class="category-name">
+            <div v-show="!category.isEditing" class="category-name">
               {{ category.name }}
             </div>
           </td>
           <td class="d-flex justify-content-between">
-            <button type="button" class="btn btn-link mr-2">Edit</button>
+            <input
+              v-show="category.isEditing"
+              v-model="category.name"
+              type="text"
+              class="form-control"
+            />
+
+            <span
+              @click.stop.prevent="handleCancel"
+              v-show="category.isEditing"
+              class="cancel"
+            >
+              ✕
+            </span>
+
+            <button
+              v-show="!category.isEditing"
+              type="button"
+              class="btn btn-link mr-2"
+              @click.stop.prevent="toggleisEditing(category.id)"
+            >
+              Edit
+            </button>
+
+            <button
+              v-show="category.isEditing"
+              type="button"
+              class="btn btn-link mr-2"
+              @click.stop.prevent="
+                updateCategory({ categoryId: category.id, name: category.name })
+              "
+            >
+              Save
+            </button>
+
             <button
               @click.stop.prevent="deleteCategories(category.id)"
               type="button"
@@ -107,8 +142,12 @@ export default {
   },
   methods: {
     fetchCategories() {
-      //定義 `fetchCategories` 方法，把 `dummyData` 帶入 Vue 物件
-      this.categories = dummyData.categories;
+      // 在每一個 category 中都添加一個 isEditing 屬性
+      this.categories = dummyData.categories.map((category) => ({
+        ...category,
+        isEditing: false,
+        nameCached: "", //資料暫存
+      }));
     },
     createCategory() {
       this.categories.push({
@@ -124,6 +163,69 @@ export default {
         (category) => category.id !== categoryId
       );
     },
+    updateCategory({ categoryId, name }) {
+      this.toggleisEditing(categoryId);
+    },
+
+    toggleIsEditing(categoryID) {
+      //editing屬性更改function
+      //map後接上一個function
+      this.categories = dummyData.categories.map((category) => {
+        if (category.id === categoryID) {
+          return {
+            ...category,
+            isEditing: !category.isEditing,
+            nameCached: category.name, //暫存區存入先前的餐廳種類
+          };
+        }
+        return category;
+      });
+    },
+
+    handleCancel(categoryId) {
+      this.categories = this.categories.map((category) => {
+        if (category.id === categoryId) {
+          return {
+            ...category,
+            // 把原本的餐廳類別名稱還回去
+            name: category.nameCached,
+          };
+        }
+        return category;
+      });
+
+      this.toggleIsEditing(categoryId); //轉換狀態
+    },
   },
 };
-</script>>
+</script>
+
+<style scoped>
+.category-name {
+  padding: 0.375rem 0.75rem;
+  border: 1px solid transparent;
+  outline: 0;
+  cursor: auto;
+}
+
+.btn-link {
+  width: 62px;
+}
+
+.cancel {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border: 1px solid #aaaaaa;
+  border-radius: 50%;
+  user-select: none;
+  cursor: pointer;
+  font-size: 12px;
+}
+</style>
