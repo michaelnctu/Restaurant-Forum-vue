@@ -35,7 +35,11 @@
         />
       </div>
 
-      <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">
+      <button
+        class="btn btn-lg btn-primary btn-block mb-3"
+        type="submit"
+        :disabled="isProcessing"
+      >
         Submit
       </button>
 
@@ -59,11 +63,21 @@ export default {
     return {
       email: "",
       password: "",
+      isProcessing: false,
     };
   },
 
   methods: {
     handleSubmit() {
+      if (!this.email || !this.password) {
+        Toast.fire({
+          icon: "warning",
+          title: "請輸入email還有密碼喔!",
+        });
+        return;
+      }
+      this.isProcessing = true; //點擊後立即鎖上submit
+
       authorizationAPI
         .signIn({
           email: this.email,
@@ -83,6 +97,7 @@ export default {
         })
         .catch((error) => {
           console.log("error", error);
+          this.isProcessing = false; //登入失敗後submit按鈕還原
           //密碼欄位清空
           this.password = "";
           //顯示錯誤提示使用的是toast模組
