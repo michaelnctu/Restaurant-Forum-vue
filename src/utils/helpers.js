@@ -3,7 +3,7 @@ import Swal from 'sweetalert2'
 
 const baseURL = 'https://forum-express-api.herokuapp.com/api'
 
-const axiosInstantce = axios.create({
+export const apiHelper = axios.create({
   baseURL
 })
 
