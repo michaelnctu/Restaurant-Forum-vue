@@ -68,44 +68,43 @@ export default {
   },
 
   methods: {
-    handleSubmit() {
-      if (!this.email || !this.password) {
-        Toast.fire({
-          icon: "warning",
-          title: "請輸入email還有密碼喔!",
-        });
-        return;
-      }
-      this.isProcessing = true; //點擊後立即鎖上submit
-
-      authorizationAPI
-        .signIn({
-          email: this.email,
-          password: this.password,
-        })
-        .then((response) => {
-          // 取得 API 請求後的資料
-          const { data } = response;
-          // 將 token 存放在 localStorage 內
-          if (data.status !== "success") {
-            throw new Error(data.message);
-          }
-          // 將伺服器回傳的 token 保存在 localStorage 中
-          localStorage.setItem("token", data.token);
-          // 成功登入後進行轉址
-          this.$router.push("/restaurants");
-        })
-        .catch((error) => {
-          console.log("error", error);
-          this.isProcessing = false; //登入失敗後submit按鈕還原
-          //密碼欄位清空
-          this.password = "";
-          //顯示錯誤提示使用的是toast模組
+    async handleSubmit() {
+      try {
+        if (!this.email || !this.password) {
           Toast.fire({
             icon: "warning",
-            title: "請輸入正確的帳號密碼!",
+            title: "請輸入email還有密碼喔!",
           });
+          return;
+        }
+
+        this.isProcessing = true; //點擊後立即鎖上submit
+
+        const response = await authorizationAPI.signIn({
+          email: this.email,
+          password: this.password,
         });
+        // 取得 API 請求後的資料
+        const { data } = response;
+        // 將 token 存放在 localStorage 內
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
+        // 將伺服器回傳的 token 保存在 localStorage 中
+        localStorage.setItem("token", data.token);
+        // 成功登入後進行轉址
+        this.$router.push("/restaurants");
+      } catch (error) {
+        console.log("error", error);
+        this.isProcessing = false; //登入失敗後submit按鈕還原
+        //密碼欄位清空
+        this.password = "";
+        //顯示錯誤提示使用的是toast模組
+        Toast.fire({
+          icon: "warning",
+          title: "請輸入正確的帳號密碼!",
+        });
+      }
     },
   },
 };
