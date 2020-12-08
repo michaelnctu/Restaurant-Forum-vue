@@ -52,6 +52,7 @@
 
 <script>
 import authorizationAPI from "./../apis/authorization";
+import { Toast } from "./../utils/helpers";
 
 export default {
   data() {
@@ -72,7 +73,23 @@ export default {
           // 取得 API 請求後的資料
           const { data } = response;
           // 將 token 存放在 localStorage 內
+          if (data.status !== "success") {
+            throw new Error(data.message);
+          }
+          // 將伺服器回傳的 token 保存在 localStorage 中
           localStorage.setItem("token", data.token);
+          // 成功登入後進行轉址
+          this.$router.push("/restaurants");
+        })
+        .catch((error) => {
+          console.log("error", error);
+          //密碼欄位清空
+          this.password = "";
+          //顯示錯誤提示使用的是toast模組
+          Toast.fire({
+            icon: "warning",
+            title: "請輸入正確的帳號密碼!",
+          });
         });
     },
   },
