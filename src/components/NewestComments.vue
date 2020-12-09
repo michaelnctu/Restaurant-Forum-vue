@@ -2,44 +2,20 @@
   <div class="card">
     <div class="card-header">最新評論</div>
     <div class="card-body">
-
-      <div 
-      v-for="comment in comments" 
-      :key="comment.id">
-
-      <div>
+      <div v-for="comment in comments" :key="comment.id">
         <h4>
-          <a href="#">   
-            {{comment.Restaurant.name}}
-          </a>
+          <router-link
+            :to="{ name: 'restaurant', params: { id: comment.Restaurant.id } }"
+          >
+            {{ comment.Restaurant.name }}
+          </router-link>
         </h4>
-        <p>{{comment.text}}</p>
+        <p>{{ comment.text }}</p>
         by
-        <a href="#"> 
-         {{comment.User.name}} </a>
-        at {{comment.createdAt | fromNow}}
-        <hr />
-      </div>
-
-      <div>
-        <h4>
-          <a href="#"> Golden Hegmann </a>
-        </h4>
-        <p>Commodi a totam.</p>
-        by
-        <a href="#"> user1 </a>
-        at 3 days ago
-        <hr />
-      </div>
-
-      <div>
-        <h4>
-          <a href="#"> Trent Hilpert </a>
-        </h4>
-        <p>Ipsa nulla qui.\nOptio labore voluptatem in quam laborum et.</p>
-        by
-        <a href="#"> user1 </a>
-        at 3 days ago
+        <router-link :to="{ name: 'user', params: { id: comment.User.id } }">
+          {{ comment.User.name }}
+        </router-link>
+        at {{ comment.createdAt | fromNow }}
         <hr />
       </div>
     </div>
@@ -49,6 +25,7 @@
 <script>
 import moment from "moment";
 export default {
+  name: "newestComments",
   props: {
     comments: {
       type: Array,

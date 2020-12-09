@@ -21,6 +21,7 @@
 <script>
 import moment from "moment";
 export default {
+  name: "newestRestaurants",
   filters: {
     fromNow(value) {
       if (!value) {
@@ -32,7 +33,7 @@ export default {
   },
   props: {
     //定義好props 就可以在樣板裡使用從父層RestaurantFeeds傳進來的資料
-    restaurants: {
+    Restaurants: {
       type: Array,
       required: true, //設定 為必填 意思是資料是必要的
     },

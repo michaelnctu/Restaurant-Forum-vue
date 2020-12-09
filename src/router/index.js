@@ -55,6 +55,11 @@ const routes = [
     component: () => import('../views/AdminRestaurantNew.vue')
   },
   {
+    path: '/restaurants/feeds',
+    name: 'resturants-feeds',
+    component: () => import('../views/RestaurantsFeeds.vue')
+  },
+  {
     path: '/restaurants/:id',
     name: 'restaurant',
     component: () => import('../views/Restaurant.vue')
@@ -63,11 +68,6 @@ const routes = [
     path: '/admin/restaurants/:id/edit',
     name: 'admin-restaurant-edit',
     component: () => import('../views/AdminRestaurantEdit.vue')
-  },
-  {
-    path: '/restaurants/feeds',
-    name: 'resturants-feeds',
-    component: () => import('../views/RestaurantsFeeds.vue')
   },
   {
     path: '/restaurants/top',
