@@ -35,6 +35,28 @@ export default {
     })
   },
 
+  getTopUsers() {
+    return apiHelper.get('/users/top', {
+      headers: { Authorization: `Bearer ${getToken}` }
+    })
+  },
+  FollowUsers({ userId }) {
+    return apiHelper.post(`/following/${userId}`, null, { //參考axios 中間帶一個data
+      headers: {
+        Authorization: `Bearer ${getToken}`
+      }
+    })
+  },
+
+  unFollowUsers({ userId }) {
+    return apiHelper.delete(`/following/${userId}`, { //參考axios 中間帶一個data
+      headers: {
+        Authorization: `Bearer ${getToken}`
+      }
+    })
+
+  }
+
 
 
 }
