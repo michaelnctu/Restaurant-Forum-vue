@@ -1,5 +1,7 @@
 <template>
-  <form @submit.stop.prevent="handleSubmit">
+  <form 
+  v-show="!isLoading"
+  @submit.stop.prevent="handleSubmit">
     <div class="form-group">
       <label for="name">Name</label>
       <input
@@ -93,39 +95,19 @@
       />
     </div>
 
-    <button type="submit" class="btn btn-primary">送出</button>
+    <button 
+    :disabled="isProcessing"
+    type="submit" 
+    class="btn btn-primary">
+    {{ isProcessing ? '處理中':'送出'}}
+    </button>
   </form>
 </template>
 
 <script>
-const dummyData = {
-  categories: [
-    {
-      id: 1,
-      name: "中式料理",
-      createdAt: "2019-06-22T09:00:43.000Z",
-      updatedAt: "2019-06-22T09:00:43.000Z",
-    },
-    {
-      id: 2,
-      name: "日本料理",
-      createdAt: "2019-06-22T09:00:43.000Z",
-      updatedAt: "2019-06-22T09:00:43.000Z",
-    },
-    {
-      id: 3,
-      name: "義大利料理",
-      createdAt: "2019-06-22T09:00:43.000Z",
-      updatedAt: "2019-06-22T09:00:43.000Z",
-    },
-    {
-      id: 4,
-      name: "墨西哥料理",
-      createdAt: "2019-06-22T09:00:43.000Z",
-      updatedAt: "2019-06-22T09:00:43.000Z",
-    },
-  ],
-};
+
+import adminApi from './../apis/admin'
+import {Toast} from './../utils/helpers'
 
 export default {
   name: "adminRestaurantForm",
@@ -141,22 +123,39 @@ export default {
         image: "",
         openingHours: "",
       }),
+      },
+      isProcessing:{
+        type:Boolean,
+        default: false
     },
   },
   data() {
     return {
       categories: [],
+      isLoading:true,
       restaurant: {
         ...this.initialRestaurant,
       },
+      
     };
   },
   created() {
     this.fetchCategories();
   },
   methods: {
-    fetchCategories() {
-      this.categories = dummyData.categories;
+    async fetchCategories() {
+      try {
+        const {data} = await adminApi.categories.get()
+        this.categories = data.categories
+        this.isLoading = false //get()完成後 轉換狀態
+      }  catch(error) {
+         this.isLoading = false
+        Toast.fire({
+          icon:'error',
+          title:'無法取得餐廳類別'
+        })
+
+      }
     },
     handleFileChange(e) {
       const files = e.target.files;

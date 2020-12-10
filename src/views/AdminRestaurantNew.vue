@@ -1,26 +1,50 @@
 <template>
   <div class="container py-5">
     <!-- 餐廳表單 AdminRestaurantForm -->
-    <AdminRestaurantForm @after-submit="handleAfterSubmit" />
+    <AdminRestaurantForm 
+    
+    :is-processing ="isProcessing"
+    @after-submit="handleAfterSubmit" />
   </div>
 </template>
 
 
 <script>
 import AdminRestaurantForm from "./../components/AdminRestaurantForm.vue";
+import adminAPI from './../apis/admin'
+import {Toast} from './../utils/helpers'
 
 export default {
   components: {
     AdminRestaurantForm,
   },
+  data() {
+    return {
+      isProcessing: false
+    }
+  },
   methods: {
-    handleAfterSubmit(formData) {
-      // 透過 API 將表單資料送到伺服器
-      //要取得表單的內容，需要透過 entries() 方法來逐條列出表單的欄位和值，現在我們先把內容印到 console 裡觀察
-      for (let [name, value] of formData.entries()) {
-        console.log(name + ": " + value);
+    async handleAfterSubmit(formData) {
+
+      try {
+        this.isProcessing = true
+        const {data} = await adminAPI.restaurants.create({formData})
+  
+        if (data.status !== 'success') {
+          throw new Error(data.message)
+        }
+
+        this.$router.push({name: 'admin-restaurants'})
       }
-    },
+      catch(error) {
+        Toast.fire({
+          icon:'error',
+          title:'表單無法發送'
+        })
+
+      }
+     
+    }, 
   },
 };
 </script>
