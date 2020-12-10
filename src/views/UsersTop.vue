@@ -7,11 +7,16 @@
     <div class="row text-center">
       <div v-for="user in users" :key="user.id" class="col-3">
         <router-link :to="{ name: 'user', params: { id: user.id } }">
-          <img :src="user.image | emptyImage" width="140px" height="140px" />
+          <img :src="user.image | emptyImage"
+           width="140px" 
+           height="140px" />
+           <!-- <img src="https://celebvogue.com/wp-content/uploads/2018/10/Bart-Kwan.jpg" alt="圖片失效就顯示這段文字" width="140px" 
+           height="140px"> -->
         </router-link>
         <h2>{{ user.name }}</h2>
+        <h2>{{ user.FollowerCount}}</h2>
         <span class="badge badge-secondary"
-          >追蹤人數：{{ user.FollowerCount }}</span
+          > 追蹤人數：{{ user.FollowerCount }}</span
         >
         <p class="mt-3">
           <button
@@ -44,7 +49,7 @@ import { Toast } from "./../utils/helpers";
 export default {
   name: "UsersTop",
   components: {
-    NavTabs,
+    NavTabs
   },
   data() {
     return {
@@ -62,8 +67,8 @@ export default {
         if (data.status === "error") {
           throw new Error(data.message);
         }
-        this.users = data.users; //array
-
+ 
+        this.users = data.users; 
         console.log("我看", data);
       } catch (error) {
         console.log("error", error);
@@ -86,6 +91,7 @@ export default {
             return {
               ...user,
               isFollowed: true, //改變isFollowed屬性
+              FollowerCount: user.FollowerCount + 1
             };
           }
           return user;
@@ -111,6 +117,7 @@ export default {
             return {
               ...user,
               isFollowed: false, //改變isFollowed屬性
+              FollowerCount: user.FollowerCount - 1
             };
           }
           return user;
