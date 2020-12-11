@@ -78,26 +78,79 @@
 </template>
 
 <script>
+import usersAPI from "./../apis/authorization";
+import { Toast } from "./../utils/helpers";
+
 export default {
+  name: "signuppage",
   data() {
     return {
       name: "",
-      emial: "",
+      email: "",
       password: "",
       passwordCheck: "",
     };
   },
   methods: {
-    handleSubmit() {
-      const data = JSON.stringify({
-        name: this.name,
-        email: this.email,
-        password: this.password,
-        passwordcheck: this.passwordCheck,
-      });
+    async handleSubmit(e) {
+      try {
+        console.log("e", e);
+        const form = e.target;
+        const formData = new FormData(form);
+        for (let [name, value] of formData.entries()) {
+          console.log(name + ": " + value);
+        } //確認formDATA有東西
 
-      console.log("data", data);
+        //密碼二次輸入不符
+        if (this.password !== this.passwordCheck) {
+          Toast.fire({
+            icon: "error",
+            title: "兩次密碼輸入不符",
+          });
+          this.passwordCheck = ""; //洗白
+          return;
+        }
+        //欄位都有被填到
+        if (
+          !this.password ||
+          !this.passwordCheck ||
+          !this.name ||
+          !this.email
+        ) {
+          Toast.fire({
+            icon: "error",
+            title: "請你確認每個欄位都有被填寫到",
+          });
+        }
+
+        const { data } = await usersAPI.signUp({
+          formData,
+          // name: this.name,
+          // email: this.email,
+          // password: this.password,
+          // passwordCheck: this.passwordCheck,
+        });
+        console.log("data", data);
+
+        if (data.status === "error") {
+          throw new Error(data.message);
+        }
+
+        Toast.fire({
+          icon: "success",
+          title: data.message,
+        });
+
+        this.$router.push("/signin");
+      } catch (error) {
+        console.log("error", error);
+        Toast.fire({
+          icon: "error",
+          title: "無法註冊，請稍後再試",
+        });
+      }
     },
   },
 };
 </script>
+

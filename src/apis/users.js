@@ -10,7 +10,6 @@ export default {
       }
     })
   },
-
   deleteFavorite({ restaurantId }) {
     return apiHelper.delete(`/favorite/${restaurantId}`, { //參考axios 中間不需要帶一個data
       headers: {
@@ -18,7 +17,6 @@ export default {
       }
     })
   },
-
   addLike({ restaurantId }) {
     return apiHelper.post(`/like/${restaurantId}`, null, { //參考axios 中間帶一個data
       headers: {
@@ -26,7 +24,6 @@ export default {
       }
     })
   },
-
   deleteLike({ restaurantId }) {
     return apiHelper.delete(`/like/${restaurantId}`, { //參考axios 中間帶一個data
       headers: {
@@ -34,7 +31,6 @@ export default {
       }
     })
   },
-
   getTopUsers() {
     return apiHelper.get('/users/top', {
       headers: { Authorization: `Bearer ${getToken}` }
@@ -47,7 +43,6 @@ export default {
       }
     })
   },
-
   unFollowUsers({ userId }) {
     return apiHelper.delete(`/following/${userId}`, { //參考axios 中間帶一個data
       headers: {
@@ -55,8 +50,7 @@ export default {
       }
     })
 
-  }
-
+  },
 
 
 }

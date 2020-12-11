@@ -1,7 +1,5 @@
 <template>
-  <form 
-  v-show="!isLoading"
-  @submit.stop.prevent="handleSubmit">
+  <form v-show="!isLoading" @submit.stop.prevent="handleSubmit">
     <div class="form-group">
       <label for="name">Name</label>
       <input
@@ -95,19 +93,15 @@
       />
     </div>
 
-    <button 
-    :disabled="isProcessing"
-    type="submit" 
-    class="btn btn-primary">
-    {{ isProcessing ? '處理中':'送出'}}
+    <button :disabled="isProcessing" type="submit" class="btn btn-primary">
+      {{ isProcessing ? "處理中" : "送出" }}
     </button>
   </form>
 </template>
 
 <script>
-
-import adminApi from './../apis/admin'
-import {Toast} from './../utils/helpers'
+import adminApi from "./../apis/admin";
+import { Toast } from "./../utils/helpers";
 
 export default {
   name: "adminRestaurantForm",
@@ -123,32 +117,28 @@ export default {
         image: "",
         openingHours: "",
       }),
-      },
-      isProcessing:{
-        type:Boolean,
-        default: false
+    },
+    isProcessing: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
     return {
       categories: [],
-      isLoading:true,
+      isLoading: true,
       restaurant: {
         ...this.initialRestaurant,
       },
-      
     };
   },
   watch: {
-    initialRestaurant(newValue){
+    initialRestaurant(newValue) {
       this.restaurant = {
         ...this.restaurant,
-        ...newValue
-      }
-
-    }
-
-
+        ...newValue,
+      };
+    },
   },
   created() {
     this.fetchCategories();
@@ -156,16 +146,15 @@ export default {
   methods: {
     async fetchCategories() {
       try {
-        const {data} = await adminApi.categories.get()
-        this.categories = data.categories
-        this.isLoading = false //get()完成後 轉換狀態
-      }  catch(error) {
-         this.isLoading = false
+        const { data } = await adminApi.categories.get();
+        this.categories = data.categories;
+        this.isLoading = false; //get()完成後 轉換狀態
+      } catch (error) {
+        this.isLoading = false;
         Toast.fire({
-          icon:'error',
-          title:'無法取得餐廳類別'
-        })
-
+          icon: "error",
+          title: "無法取得餐廳類別",
+        });
       }
     },
     handleFileChange(e) {
@@ -183,8 +172,27 @@ export default {
       }
     },
     handleSubmit(e) {
+      // if (!this.restaurant.name) {
+      //   Toast.fire({
+      //     icon: "warning",
+      //     title: "請填寫餐廳名稱",
+      //   });
+      //   return;
+      // } else if (!this.restaurant.categoryId) {
+      //   Toast.fire({
+      //     icon: "warning",
+      //     title: "請選擇餐廳類別",
+      //   });
+      //   return;
+      // }
+
       const form = e.target;
       const formData = new FormData(form);
+
+      for (let [name, value] of formData.entries()) {
+        console.log(name + ": " + value);
+      } //確認formData有東西
+      console.log("formdata", formData);
       this.$emit("after-submit", formData); //發送給父層
     },
   },

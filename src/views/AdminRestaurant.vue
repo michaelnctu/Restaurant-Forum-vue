@@ -33,9 +33,10 @@
 
     <br />
     <br />
-    <button type="button" class="btn btn-link" @click="$router.back()">
+
+    <router-link to="/admin/restaurants" class="btn btn-link">
       回上一頁
-    </button>
+    </router-link>
   </div>
 </template>
 
