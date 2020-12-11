@@ -59,9 +59,10 @@ export default {
     async fetchRestaurant(restaurantId) {
       try {
         const { data } = await adminAPI.restaurants.getDetail({ restaurantId });
-        console.log("data", data);
+        console.log("data狀態", data);
+        console.log("stauts", data.status);
 
-        if (data.status !== "success") {
+        if (data.status === "error") {
           throw new Error(data.message);
         }
         this.restaurant = data.restaurant;
