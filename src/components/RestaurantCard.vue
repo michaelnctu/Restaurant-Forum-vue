@@ -68,6 +68,10 @@ export default {
       type: Object,
       required: true,
     },
+    isprocessing: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {

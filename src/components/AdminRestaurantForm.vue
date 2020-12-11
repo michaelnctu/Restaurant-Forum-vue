@@ -139,6 +139,17 @@ export default {
       
     };
   },
+  watch: {
+    initialRestaurant(newValue){
+      this.restaurant = {
+        ...this.restaurant,
+        ...newValue
+      }
+
+    }
+
+
+  },
   created() {
     this.fetchCategories();
   },
