@@ -16,7 +16,16 @@
         <td>{{ restaurant.Category ? restaurant.Category.name : "未分類" }}</td>
         <td>{{ restaurant.name }}</td>
         <td class="d-flex justify-content-between">
-          <a href="#" class="btn btn-link">Show</a>
+          <router-link
+            :to="{
+              name: 'admin-restaurant',
+              params: {
+                id: restaurant.id,
+              },
+            }"
+            class="btn btn-link"
+            >Show
+          </router-link>
 
           <router-link
             :to="{
@@ -24,7 +33,6 @@
               params: {
                 id: restaurant.id,
               },
-              s,
             }"
             class="btn btn-link"
           >

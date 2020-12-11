@@ -3,6 +3,9 @@ import VueRouter from 'vue-router'
 import notFound from '../views/notFound.vue'
 import Signin from '../views/Signin.vue'
 import Restaurants from '../views/Restaurants.vue'
+import AdminRestaurant from '../views/AdminRestaurant.vue'
+import AdminRestaurants from '../views/AdminRestaurants.vue'
+
 
 Vue.use(VueRouter)
 
@@ -36,7 +39,12 @@ const routes = [
   {
     path: '/admin/restaurants',
     name: 'admin-restaurants',
-    component: () => import('../views/AdminRestaurants.vue')
+    component: AdminRestaurants
+  },
+  {
+    path: '/admin/restaurants/:id',
+    name: 'admin-restaurant',
+    component: AdminRestaurant
   },
   {
     path: '/admin/categories',
