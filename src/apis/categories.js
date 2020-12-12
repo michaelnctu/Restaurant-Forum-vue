@@ -11,16 +11,16 @@ export default {
     })
   },
 
-  postCategories(category) {
-    return apiHelper.post(`/admin/categories`, category, {
+  postCategories({ category }) {
+    return apiHelper.post(`/admin/categories`, { category }, {
       headers: {
         Authorization: `Bearer ${getToken}`
       }
     })
   },
 
-  putCategories(categoryId, category) {
-    return apiHelper.put(`/admin/categories/${categoryId}`, category, {
+  putCategories({ categoryId }) {
+    return apiHelper.put(`/admin/categories/${categoryId}`, { categoryId }, {
       headers: {
         Authorization: `Bearer ${getToken}`
       }

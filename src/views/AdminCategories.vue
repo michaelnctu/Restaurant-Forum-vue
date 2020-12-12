@@ -84,9 +84,9 @@
 import AdminNav from "../components/AdminNav";
 import cateAPI from "./../apis/categories";
 import { Toast } from "./../utils/helpers";
-import { v4 as uuidv4 } from "uuid"; //先透過 uuid 產生一組隨機的 id，所以要記得引入 uuid 模組進來使用：
 
 export default {
+  name: "AdminCategories",
   components: {
     AdminNav,
   },
@@ -94,6 +94,7 @@ export default {
     return {
       categories: [],
       newCategoryName: "",
+      isProcessing: false,
     };
   },
   created() {
@@ -121,19 +122,27 @@ export default {
       }
     },
 
-    async createCategory(newCategoryName) {
-      console.log("this", newCategoryName);
+    async createCategory() {
+      console.log("this", this.newCategoryName);
       try {
-        const { data } = await cateAPI.postCategories(newCategoryName);
+        this.isProcsessing = true;
+
+        const { data } = await cateAPI.postCategories({
+          category: this.newCategoryName,
+        });
+
+        console.log("this", this.categoryId);
+
         if (data.status === "error") {
           throw new Error(data.message);
         }
-        console.log("data status", data.status);
+
         this.categories.push({
-          id: uuidv4(), //隨機產生id的模組
+          id: this.categoryId, //隨機產生id的模組
           name: this.newCategoryName,
         });
         this.newCategoryName = ""; //記得把框內輸入框空白
+        this.isProcsessing = false;
       } catch (error) {
         console.log("error", error);
         Toast.fire({
@@ -142,7 +151,12 @@ export default {
         });
       }
     },
-    deleteCategories(categoryId) {
+
+    async deleteCategories(categoryId) {
+      try {
+      }
+      catchg;
+
       // 將該餐廳類別從陣列中移除
       this.categories = this.categories.filter(
         (category) => category.id !== categoryId
