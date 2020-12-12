@@ -11,8 +11,8 @@ export default {
     })
   },
 
-  postCategories({ category }) {
-    return apiHelper.post(`/admin/categories`, { category }, {
+  postCategories({ name }) {
+    return apiHelper.post(`/admin/categories`, { name }, {
       headers: {
         Authorization: `Bearer ${getToken}`
       }
@@ -27,7 +27,7 @@ export default {
     })
   },
 
-  deleteCategories(categoryId) {
+  deleteCategory({ categoryId }) {
     return apiHelper.delete(`/admin/categories/${categoryId}`, {
       headers: {
         Authorization: `Bearer ${getToken}`

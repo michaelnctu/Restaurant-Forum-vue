@@ -18,8 +18,9 @@
             @click.stop.prevent="createCategory"
             type="button"
             class="btn btn-primary"
+            :disabled="isProcessing"
           >
-            新增
+            {{ isProcessing ? "處理中" : "新增" }}
           </button>
         </div>
       </div>
@@ -123,28 +124,34 @@ export default {
     },
 
     async createCategory() {
-      console.log("this", this.newCategoryName);
       try {
-        this.isProcsessing = true;
+        this.isProcessing = true;
 
         const { data } = await cateAPI.postCategories({
-          category: this.newCategoryName,
+          name: this.newCategoryName,
         });
 
-        console.log("this", this.categoryId);
+        console.log("Id", data);
 
         if (data.status === "error") {
           throw new Error(data.message);
+        } else {
+          Toast.fire({
+            icon: "success",
+            title: "成功新增類別囉",
+          });
         }
 
         this.categories.push({
-          id: this.categoryId, //隨機產生id的模組
+          id: data.categoryId, //隨機產生id的模組
           name: this.newCategoryName,
         });
         this.newCategoryName = ""; //記得把框內輸入框空白
-        this.isProcsessing = false;
+
+        this.isProcessing = false;
       } catch (error) {
         console.log("error", error);
+        this.isProcessing = false;
         Toast.fire({
           icon: "error",
           title: "無法新增類別",
@@ -152,19 +159,33 @@ export default {
       }
     },
 
-    async deleteCategories(categoryId) {
+    async deleteCategory(categoryId) {
       try {
-      }
-      catchg;
+        const { data } = await cateAPI.deleteCategory({ categoryId });
+        console.log("data", data);
 
-      // 將該餐廳類別從陣列中移除
-      this.categories = this.categories.filter(
-        (category) => category.id !== categoryId
-      );
+        // 將該餐廳類別從陣列中移除
+        this.categories = this.categories.filter(
+          (category) => category.id !== categoryId
+        );
+
+        if (data.status === "success") {
+          Toast.fire({
+            icon: "success",
+            title: "成功刪除 ",
+          });
+        } else {
+          throw new Error(data.message);
+        }
+      } catch (error) {
+        console.log("error", error);
+        Toast.fire({
+          icon: "error",
+          title: "無法取得類別",
+        });
+      }
     },
-    // updateCategory({ categoryId, name }) {
-    //   this.toggleisEditing(categoryId);
-    // },
+
     updateCategory({ categoryId }) {
       this.toggleisEditing(categoryId);
     },
