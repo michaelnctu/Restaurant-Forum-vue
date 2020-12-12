@@ -124,13 +124,12 @@ export default {
         }
 
         const { data } = await usersAPI.signUp({
-          formData,
-          // name: this.name,
-          // email: this.email,
-          // password: this.password,
-          // passwordCheck: this.passwordCheck,
+          // formData,
+          name: this.name,
+          email: this.email,
+          password: this.password,
+          passwordCheck: this.passwordCheck,
         });
-        console.log("data", data);
 
         if (data.status === "error") {
           throw new Error(data.message);

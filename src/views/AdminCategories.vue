@@ -82,36 +82,9 @@
 
 <script>
 import AdminNav from "../components/AdminNav";
+import cateAPI from "./../apis/categories";
+import { Toast } from "./../utils/helpers";
 import { v4 as uuidv4 } from "uuid"; //先透過 uuid 產生一組隨機的 id，所以要記得引入 uuid 模組進來使用：
-//  2. 定義暫時使用的資料
-const dummyData = {
-  categories: [
-    {
-      id: 1,
-      name: "中式料理",
-      createdAt: "2019-06-22T09:00:43.000Z",
-      updatedAt: "2019-06-22T09:00:43.000Z",
-    },
-    {
-      id: 2,
-      name: "日本料理",
-      createdAt: "2019-06-22T09:00:43.000Z",
-      updatedAt: "2019-06-22T09:00:43.000Z",
-    },
-    {
-      id: 3,
-      name: "義大利料理",
-      createdAt: "2019-06-22T09:00:43.000Z",
-      updatedAt: "2019-06-22T09:00:43.000Z",
-    },
-    {
-      id: 4,
-      name: "墨西哥料理",
-      createdAt: "2019-06-22T09:00:43.000Z",
-      updatedAt: "2019-06-22T09:00:43.000Z",
-    },
-  ],
-};
 
 export default {
   components: {
@@ -127,21 +100,47 @@ export default {
     this.fetchCategories();
   },
   methods: {
-    fetchCategories() {
+    async fetchCategories() {
       // 在每一個 category 中都添加一個 isEditing 屬性
-      this.categories = dummyData.categories.map((category) => ({
-        ...category,
-        isEditing: false,
-        nameCached: "", //資料暫存
-      }));
+      try {
+        const { data } = await cateAPI.getCategories();
+        if (data.status === "error") {
+          throw new Error(data.message);
+        }
+        this.categories = data.categories.map((category) => ({
+          ...category,
+          isEditing: false,
+          nameCached: "", //資料暫存
+        }));
+      } catch (error) {
+        console.log("error", error);
+        Toast.fire({
+          icon: "error",
+          title: "無法取得類別",
+        });
+      }
     },
-    createCategory() {
-      this.categories.push({
-        id: uuidv4(), //隨機產生id的模組
-        name: this.newCategoryName,
-      });
 
-      this.newCategoryName = ""; //記得把框內輸入框空白
+    async createCategory(newCategoryName) {
+      console.log("this", newCategoryName);
+      try {
+        const { data } = await cateAPI.postCategories(newCategoryName);
+        if (data.status === "error") {
+          throw new Error(data.message);
+        }
+        console.log("data status", data.status);
+        this.categories.push({
+          id: uuidv4(), //隨機產生id的模組
+          name: this.newCategoryName,
+        });
+        this.newCategoryName = ""; //記得把框內輸入框空白
+      } catch (error) {
+        console.log("error", error);
+        Toast.fire({
+          icon: "error",
+          title: "無法新增類別",
+        });
+      }
     },
     deleteCategories(categoryId) {
       // 將該餐廳類別從陣列中移除
@@ -156,20 +155,20 @@ export default {
       this.toggleisEditing(categoryId);
     },
 
-    toggleIsEditing(categoryID) {
-      //editing屬性更改function
-      //map後接上一個function
-      this.categories = dummyData.categories.map((category) => {
-        if (category.id === categoryID) {
-          return {
-            ...category,
-            isEditing: !category.isEditing,
-            nameCached: category.name, //暫存區存入先前的餐廳種類
-          };
-        }
-        return category;
-      });
-    },
+    // toggleIsEditing(categoryID) {
+    //   //editing屬性更改function
+    //   //map後接上一個function
+    //   this.categories = dummyData.categories.map((category) => {
+    //     if (category.id === categoryID) {
+    //       return {
+    //         ...category,
+    //         isEditing: !category.isEditing,
+    //         nameCached: category.name, //暫存區存入先前的餐廳種類
+    //       };
+    //     }
+    //     return category;
+    //   });
+    // },
 
     handleCancel(categoryId) {
       this.categories = this.categories.map((category) => {

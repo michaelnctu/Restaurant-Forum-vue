@@ -20,8 +20,9 @@ export default {
   //   })
   // },
 
-  signUp({ formData }) {
-    return apiHelper.post(`/signup`, formData, { //參考axios 中間帶一個data
+  signUp(data) {
+    return apiHelper.post(`/signup`,
+      { ...data }, { //參考axios 中間帶一個data
       headers: {
         Authorization: `Bearer ${getToken}`
       }
