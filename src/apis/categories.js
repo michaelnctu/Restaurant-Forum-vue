@@ -11,6 +11,7 @@ export default {
     })
   },
 
+  //name要跟傳到後端的資料裡key值一樣
   postCategories({ name }) {
     return apiHelper.post(`/admin/categories`, { name }, {
       headers: {
@@ -19,8 +20,9 @@ export default {
     })
   },
 
-  putCategories({ categoryId }) {
-    return apiHelper.put(`/admin/categories/${categoryId}`, { categoryId }, {
+
+  putCategories({ categoryId, name }) {
+    return apiHelper.put(`/admin/categories/${categoryId}`, { name }, {
       headers: {
         Authorization: `Bearer ${getToken}`
       }

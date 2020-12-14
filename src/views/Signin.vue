@@ -92,6 +92,10 @@ export default {
         }
         // 將伺服器回傳的 token 保存在 localStorage 中
         localStorage.setItem("token", data.token);
+
+        //將資料傳到vuex中 資訊交給mutation
+        this.$store.commit("setCurrentUser", data.user);
+
         // 成功登入後進行轉址
         this.$router.push("/restaurants");
       } catch (error) {

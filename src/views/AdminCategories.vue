@@ -40,23 +40,33 @@
             {{ category.id }}
           </th>
           <td class="position-relative"></td>
+
           <td class="position-relative">
             <div v-show="!category.isEditing" class="category-name">
               {{ category.name }}
             </div>
+
             <input
               v-show="category.isEditing"
               v-model="category.name"
               type="text"
               class="form-control"
             />
-            <span v-show="category.isEditing" class="cancel"> ✕ </span>
+
+            <span
+              v-show="category.isEditing"
+              class="cancel"
+              @click.stop.prevent="handleCancel(category.id)"
+            >
+              ✕
+            </span>
           </td>
           <td class="d-flex justify-content-between">
             <button
               v-show="!category.isEditing"
               type="button"
               class="btn btn-link mr-2"
+              @click.stop.prevent="toggleIsEditing(category.id)"
             >
               Edit
             </button>
@@ -64,9 +74,13 @@
               v-show="category.isEditing"
               type="button"
               class="btn btn-link mr-2"
+              @click.stop.prevent="
+                updateCategory({ categoryId: category.id, name: category.name })
+              "
             >
               Save
             </button>
+
             <button
               type="button"
               class="btn btn-link mr-2"
@@ -96,6 +110,7 @@ export default {
       categories: [],
       newCategoryName: "",
       isProcessing: false,
+      isEditing: false,
     };
   },
   created() {
@@ -161,7 +176,10 @@ export default {
 
     async deleteCategory(categoryId) {
       try {
-        const { data } = await cateAPI.deleteCategory({ categoryId });
+        const { data } = await cateAPI.deleteCategory({
+          categoryId,
+          name: this.categories,
+        });
         console.log("data", data);
 
         // 將該餐廳類別從陣列中移除
@@ -186,24 +204,53 @@ export default {
       }
     },
 
-    updateCategory({ categoryId }) {
-      this.toggleisEditing(categoryId);
+    async updateCategory({ categoryId, name }) {
+      try {
+        const { data } = await cateAPI.putCategories({ categoryId, name });
+        console.log("data", data);
+
+        if (data.status === "success") {
+          Toast.fire({
+            icon: "success",
+            title: "成功更新 ",
+          });
+        } else {
+          throw new Error(data.message);
+        }
+        this.toggleIsEditing(categoryId);
+
+        // this.categories = this.categories.map((category) => {
+        //   if (category.id === categoryId) {
+        //     return {
+        //       ...category,
+        //       isEditing: !category.isEditing,
+        //     };
+        //   }
+        //   return category;
+        // });
+      } catch (error) {
+        console.log("error", error);
+        Toast.fire({
+          icon: "error",
+          title: "更新失敗",
+        });
+      }
     },
 
-    // toggleIsEditing(categoryID) {
-    //   //editing屬性更改function
-    //   //map後接上一個function
-    //   this.categories = dummyData.categories.map((category) => {
-    //     if (category.id === categoryID) {
-    //       return {
-    //         ...category,
-    //         isEditing: !category.isEditing,
-    //         nameCached: category.name, //暫存區存入先前的餐廳種類
-    //       };
-    //     }
-    //     return category;
-    //   });
-    // },
+    toggleIsEditing(categoryId) {
+      //editing屬性更改function
+      //map後接上一個function
+      this.categories = this.categories.map((category) => {
+        if (category.id === categoryId) {
+          return {
+            ...category,
+            isEditing: !category.isEditing,
+            nameCached: category.name, //暫存區存入先前的餐廳種類
+          };
+        }
+        return category;
+      });
+    },
 
     handleCancel(categoryId) {
       this.categories = this.categories.map((category) => {

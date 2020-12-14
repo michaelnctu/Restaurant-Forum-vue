@@ -1,17 +1,14 @@
 
 <template>
   <div class="container py-5">
-    <h1>餐廳描述頁</h1>
     <!-- 餐廳資訊頁 RestaurantDetail -->
     <RestaurantDetail :restdetailProp="restaurant" />
 
     <hr />
     <!-- 餐廳評論 RestaurantComments -->
-    <!-- 新增評論 CreateComment -->
 
-    <!-- RestaurantComments是compone  nts rest-comments屬性 restaurantComments下方sript中data內的值 -->
     <RestaurantComments
-      :restcommentsProp="restaurantCommentsMethod"
+      :restcommentsProp="restaurantComments"
       @after-delete-comment="afterDeleteComment"
     />
 
@@ -23,84 +20,12 @@
 import RestaurantComments from "./../components/RestaurantComments";
 import RestaurantDetail from "./../components/RestaurantDetail";
 import CreateComment from "./../components/CreateComment";
-
-const dummyData = {
-  restaurant: {
-    id: 1,
-    name: "Judy Runte",
-    tel: "(918) 827-1962",
-    address: "98138 Elisa Road",
-    opening_hours: "08:00",
-    description: "dicta et cupiditate",
-    image: "https://loremflickr.com/320/240/food,dessert,restaurant/?random=1",
-    createdAt: "2019-06-22T09:00:43.000Z",
-    updatedAt: "2019-06-22T09:00:43.000Z",
-    CategoryId: 3,
-    Category: {
-      id: 3,
-      name: "義大利料理",
-      createdAt: "2019-06-22T09:00:43.000Z",
-      updatedAt: "2019-06-22T09:00:43.000Z",
-    },
-    FavoritedUsers: [],
-    LikedUsers: [],
-    Comments: [
-      {
-        id: 3,
-        text: "I wanna know 你型不行",
-        UserId: 2,
-        RestaurantId: 1,
-        createdAt: "2019-06-22T09:00:43.000Z",
-        updatedAt: "2019-06-22T09:00:43.000Z",
-        User: {
-          id: 2,
-          name: "user1",
-          email: "user1@example.com",
-          password:
-            "$2a$10$0ISHJI48xu/VRNVmEeycFe8v5ChyT305f8KaJVIhumu7M/eKAikkm",
-          image: "https://i.imgur.com/XooCt5K.png",
-          isAdmin: false,
-          createdAt: "2019-06-22T09:00:43.000Z",
-          updatedAt: "2019-06-23T01:16:31.000Z",
-        },
-      },
-      {
-        id: 4,
-        text: "u gotta know 別懷疑你自己的能力",
-        UserId: 2,
-        RestaurantId: 1,
-        createdAt: "2019-06-22T09:00:43.000Z",
-        updatedAt: "2019-06-22T09:00:43.000Z",
-        User: {
-          id: 2,
-          name: "user1",
-          email: "user1@example.com",
-          password:
-            "$2a$10$0ISHJI48xu/VRNVmEeycFe8v5ChyT305f8KaJVIhumu7M/eKAikkm",
-          image: "https://i.imgur.com/XooCt5K.png",
-          isAdmin: false,
-          createdAt: "2019-06-22T09:00:43.000Z",
-          updatedAt: "2019-06-23T01:16:31.000Z",
-        },
-      },
-    ],
-  },
-  isFavorited: false,
-  isLiked: false,
-};
-
-const dummyUser = {
-  currentUser: {
-    id: 1,
-    name: "管理者",
-    email: "root@example.com",
-    image: "https://i.pravatar.cc/300",
-    isAdmin: true,
-  },
-  isAuthenticated: true,
-};
+import restaurantAPI from "./../apis/restaurants";
+import { Toast } from "./../utils/helpers";
+import { mapState } from "vuex";
 
 export default {
+  name: "Restautant",
   components: {
     RestaurantComments,
     RestaurantDetail,
@@ -108,7 +33,6 @@ export default {
   },
   data() {
     return {
-      currentUser: dummyUser.currentUser,
       restaurant: {
         id: -1,
         name: "",
@@ -124,28 +48,44 @@ export default {
       restaurantComments: [],
     };
   },
+  computed: {
+    ...mapState(["currentUser"]),
+  },
   created() {
     const { id: restaurantId } = this.$route.params; //拿params
     this.fetchRestaurant(restaurantId);
   },
+
+  //當我更改網址上的id時可以同時向後端發送請求
+  beforeRouteUpdate(to, from, next) {
+    const { id } = to.params;
+    this.fetchRestaurant(id);
+    next();
+  },
+
   methods: {
-    fetchRestaurant(restaurantId) {
-      console.log("fetchRestaurant id: ", restaurantId);
+    async fetchRestaurant(restaurantId) {
+      try {
+        console.log("id", restaurantId);
+        const { data } = await restaurantAPI.getRestaurant({ restaurantId });
 
-      this.restaurant = {
-        id: dummyData.restaurant.id,
-        name: dummyData.restaurant.name,
-        categoryName: dummyData.restaurant.Category.name,
-        image: dummyData.restaurant.image,
-        openingHours: dummyData.restaurant.opening_hours,
-        tel: dummyData.restaurant.tel,
-        address: dummyData.restaurant.address,
-        description: dummyData.restaurant.description,
-        isFavorited: dummyData.isFavorited,
-        isLiked: dummyData.isLiked,
-      };
+        this.restaurant = {
+          ...this.restaurant,
+          ...data.restaurant,
+          isFavorited: data.isLiked,
+          isLiked: data.isFavorited,
+          categoryName: data.restaurant.Category
+            ? data.restaurant.Category.name
+            : "未分類",
+        };
 
-      this.restaurantCommentsMethod = dummyData.restaurant.Comments;
+        this.restaurantComments = data.restaurant.Comments;
+      } catch (error) {
+        Toast.fire({
+          icon: "error",
+          title: "無法取得餐廳資料，請稍後再試",
+        });
+      }
     },
     afterDeleteComment(commentId) {
       console.log("afterDeleteComment", commentId);

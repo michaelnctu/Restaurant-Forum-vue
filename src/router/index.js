@@ -5,6 +5,7 @@ import Signin from '../views/Signin.vue'
 import Restaurants from '../views/Restaurants.vue'
 import AdminRestaurant from '../views/AdminRestaurant.vue'
 import AdminRestaurants from '../views/AdminRestaurants.vue'
+import store from '../store'
 
 
 Vue.use(VueRouter)
@@ -27,6 +28,11 @@ const routes = [
     component: () => import('../views/Signup.vue')
   },
   {
+    path: '/restaurants',
+    name: 'restaurants',
+    component: Restaurants
+  },
+  {
     path: '/admin',
     exact: true, //路由需要完全對應對照
     redirect: '/admin/restaurants'
@@ -46,22 +52,7 @@ const routes = [
     name: 'admin-restaurant',
     component: AdminRestaurant
   },
-  {
-    path: '/admin/categories',
-    name: 'admin-categories',
-    component: () => import('../views/AdminCategories.vue')
 
-  },
-  {
-    path: '/restaurants',
-    name: 'restaurants',
-    component: Restaurants
-  },
-  {
-    path: '/admin/restaurants/new',
-    name: 'admin-restaurants-new',
-    component: () => import('../views/AdminRestaurantNew.vue')
-  },
   {
     path: '/restaurants/feeds',
     name: 'resturants-feeds',
@@ -77,6 +68,22 @@ const routes = [
     name: 'restaurant',
     component: () => import('../views/Restaurant.vue')
   },
+
+
+
+  {
+    path: '/admin/categories',
+    name: 'admin-categories',
+    component: () => import('../views/AdminCategories.vue')
+
+  },
+
+  {
+    path: '/admin/restaurants/new',
+    name: 'admin-restaurants-new',
+    component: () => import('../views/AdminRestaurantNew.vue')
+  },
+
   {
     path: '/admin/restaurants/:id/edit',
     name: 'admin-restaurant-edit',
@@ -104,6 +111,12 @@ const router = new VueRouter({
   linkExactActiveClass: 'active',  //如果完全匹配則加上active
   routes
 
+})
+
+router.beforeEach((to, from, next) => {
+  //使用dispatch 呼叫Vuex的action
+  store.dispatch('fetchCurrentUser')
+  next()
 })
 
 export default router
