@@ -1,12 +1,12 @@
 <template>
-  <div class="col-md-6 col-lg-4 card">
-    <div class="card mb-4">
+  <div class="col-md-12 col-lg-4 mb-4 card">
+    <div class="card allcard mb-4">
       <img
         class="card-img-top"
         :src="restaurant.image"
         alt="Card image cap"
         width="286px"
-        height="180px"
+        height="400px"
       />
 
       <div class="card-body">
@@ -16,6 +16,7 @@
             >{{ restaurant.name }}</router-link
           >
         </p>
+
         <span class="badge badge-secondary">{{
           restaurant.Category.name
         }}</span>
@@ -23,6 +24,7 @@
           {{ restaurant.description }}
         </p>
       </div>
+
       <div class="card-footer">
         <button
           v-if="restaurant.isFavorited"
@@ -172,3 +174,10 @@ export default {
   },
 };
 </script>
+
+
+<style >
+.allcard {
+  border: solid green;
+}
+</style>

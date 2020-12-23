@@ -1,13 +1,14 @@
 <template>
   <div id="restaurant-forum">
-    <Navbar />
-    <br />
-    <br />
-    <div class="main-container">
-      <router-view />
-    </div>
-    <br />
-    <Footer />
+    <v-app>
+      <Navbar />
+
+      <main role="main" class="mt-5 mb-5 bg-white">
+        <router-view />
+      </main>
+
+      <Footer />
+    </v-app>
   </div>
 </template>
 
@@ -26,16 +27,13 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+#restaurant-forum {
+  font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 40px;
+  height: 100%;
+  border: solid pink;
 }
 
 #nav a {
@@ -49,9 +47,5 @@ export default {
 
 .main {
   border: solid pink;
-}
-
-.container {
-  width: 100%;
 }
 </style>

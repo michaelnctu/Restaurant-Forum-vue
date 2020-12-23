@@ -64,6 +64,7 @@ li {
 
 footer {
   width: 100%;
+  height: auto;
 }
 
 .main-content {
@@ -84,7 +85,7 @@ img {
 }
 
 .footer-block {
-  margin: 80px;
+  margin: 70px;
 }
 
 .contact-content {
