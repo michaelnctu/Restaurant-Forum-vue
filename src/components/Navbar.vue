@@ -1,7 +1,6 @@
 <template>
-  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-    <router-link class="navbar-brand" to="/"> 餐廳評論網 </router-link>
-
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <router-link class="navbar-brand" to="/"> MealFresh </router-link>
     <button
       class="navbar-toggler"
       type="button"
@@ -20,13 +19,13 @@
         <router-link
           v-if="currentUser.isAdmin"
           to="/admin"
-          class="text-white mr-3"
+          class="text-dark mr-3"
         >
           管理員後台
         </router-link>
 
         <!-- is user is login -->
-        <router-link to="#" class="text-white mr-3"> 使用者 您好 </router-link>
+        <router-link to="#" class="text-dark mr-3"> 使用者 您好 </router-link>
         <button
           type="button"
           class="btn btn-sm btn-outline-success my-2 my-sm-0"
@@ -52,3 +51,13 @@ export default {
   },
 };
 </script>
+
+<style>
+.navbar-brand {
+  font-family: "Langar", cursive;
+  font-size: 2rem;
+}
+.navbar {
+  background-color: white;
+}
+</style>

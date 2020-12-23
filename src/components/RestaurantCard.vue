@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-6 col-lg-4">
+  <div class="col-md-6 col-lg-4 card">
     <div class="card mb-4">
       <img
         class="card-img-top"
@@ -8,6 +8,7 @@
         width="286px"
         height="180px"
       />
+
       <div class="card-body">
         <p class="card-text title-wrap">
           <router-link

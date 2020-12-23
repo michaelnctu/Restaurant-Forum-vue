@@ -1,9 +1,13 @@
 <template>
   <div id="restaurant-forum">
     <Navbar />
-    <main class="mt-5 bg-white">
+    <br />
+    <br />
+    <div class="main-container">
       <router-view />
-    </main>
+    </div>
+    <br />
+    <Footer />
   </div>
 </template>
 
@@ -11,10 +15,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 export default {
   components: {
     Navbar: Navbar,
+    Footer: Footer,
   },
 };
 </script>
@@ -29,7 +35,7 @@ export default {
 }
 
 #nav {
-  padding: 30px;
+  padding: 40px;
 }
 
 #nav a {
@@ -39,5 +45,13 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.main {
+  border: solid pink;
+}
+
+.container {
+  width: 100%;
 }
 </style>
