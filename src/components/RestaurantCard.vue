@@ -6,7 +6,7 @@
         :src="restaurant.image"
         alt="Card image cap"
         width="286px"
-        height="400px"
+        height="270px"
       />
 
       <div class="card-body">

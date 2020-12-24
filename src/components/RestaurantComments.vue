@@ -10,16 +10,23 @@
           class="btn btn-danger float-right"
           @click.stop.prevent="handleDeleteButtonClick(comment.id)"
         ></button>
+        <div class="user">
+          <div class="avatar"></div>
+          <h3 class="username">
+            <a href="#"> {{ comment.User.name }}</a>
+            <span href="#"
+              >-{{ comment.createdAt | fromNow }}
+              <i class="fab fa-fort-awesome-alt"></i>
+            </span>
+          </h3>
+        </div>
 
-        <h3>
-          <a href="#"> {{ comment.User.name }}</a>
-        </h3>
         <p>{{ comment.text }}</p>
         <footer class="blockquote-footer">
           {{ comment.createdAt | fromNow }}
         </footer>
       </blockquote>
-      <hr />
+      <hr style="background-color: grey" />
     </div>
   </div>
 </template>
@@ -70,3 +77,27 @@ export default {
   },
 };
 </script>
+
+<style >
+.user {
+  border: solid green;
+  width: 200px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  border: solid red;
+}
+
+.username {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+</style>

@@ -7,7 +7,7 @@
         <router-view />
       </main>
 
-      <Footer />
+      <!-- <Footer /> -->
     </v-app>
   </div>
 </template>
@@ -16,12 +16,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer";
 
 export default {
   components: {
     Navbar: Navbar,
-    Footer: Footer,
+    // Footer: Footer,
   },
 };
 </script>
