@@ -48,6 +48,11 @@ export default {
       headers: { Authorization: `Bearer ${getToken}` }
     })
   },
+  getUser({ userId }) {
+    return apiHelper.get(`/users/${userId}`, {
+      headers: { Authorization: `Bearer ${getToken}` }
+    })
+  },
   FollowUsers({ userId }) {
     return apiHelper.post(`/following/${userId}`, null, { //參考axios 中間帶一個data
       headers: {

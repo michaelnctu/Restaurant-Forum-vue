@@ -1,67 +1,61 @@
   
 <template>
   <div class="container py-5">
-    <NavTabs />
     <Spinner v-if="isLoading" />
     <template v-else>
-      <h1 class="mt-5">人氣餐廳</h1>
+      <h1 class="mt-5 restaurants-title">
+        人氣餐廳
+        <button type="button" class="btn btn-outline-danger">查看全部</button>
+      </h1>
 
       <hr />
 
       <VueSlickCarousel v-bind="settings">
         <div><h3>1</h3></div>
-        <div><h3>2</h3></div>
-        <div><h3>3</h3></div>
-        <div><h3>4</h3></div>
-        <div><h3>5</h3></div>
-
+        <div><h3>1</h3></div>
+        <div><h3>1</h3></div>
+        <div><h3>1</h3></div>
+        <div><h3>1</h3></div>
         <div
           v-for="restaurant in restaurants"
           :key="restaurant.id"
-          class="row no-gutters slider-item"
+          class="card"
+          style="width: 15rem"
         >
-          <div class="col-md-4">
-            <router-link
-              :to="{ name: 'restaurant', params: { id: restaurant.id } }"
+          <router-link
+            :to="{ name: 'restaurant', params: { id: restaurant.id } }"
+          >
+            <img
+              :src="restaurant.image | emptyImage"
+              class="toprestaurant-img"
+              alt="..."
+            />
+          </router-link>
+          <div class="card-body">
+            <span class="badge badge-secondary"
+              >收藏數：{{ restaurant.FavoriteCount }}</span
             >
-              <img class="card-img" :src="restaurant.image | emptyImage" />
-            </router-link>
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">
-                {{ restaurant.name }}
-              </h5>
-              <span class="badge badge-secondary"
-                >收藏數：{{ restaurant.FavoriteCount }}</span
-              >
-              <p class="card-text">
-                {{ restaurant.description }}
-              </p>
-              <router-link
-                class="btn btn-primary mr-2"
-                :to="{ name: 'restaurant', params: { id: restaurant.id } }"
-              >
-                Show
-              </router-link>
 
-              <button
-                v-if="restaurant.isFavorited"
-                type="button"
-                class="btn btn-danger mr-2"
-                @click.stop.prevent="deleteFavorite(restaurant.id)"
-              >
-                移除最愛
-              </button>
-              <button
-                v-else
-                type="button"
-                class="btn btn-primary"
-                @click.stop.prevent="addFavorite(restaurant.id)"
-              >
-                加到最愛
-              </button>
-            </div>
+            <p class="card-text">
+              {{ restaurant.description }}
+            </p>
+
+            <button
+              v-if="restaurant.isFavorited"
+              type="button"
+              class="btn btn-danger mr-2"
+              @click.stop.prevent="deleteFavorite(restaurant.id)"
+            >
+              移除最愛
+            </button>
+            <button
+              v-else
+              type="button"
+              class="btn btn-primary"
+              @click.stop.prevent="addFavorite(restaurant.id)"
+            >
+              加到最愛
+            </button>
           </div>
         </div>
       </VueSlickCarousel>
@@ -125,7 +119,6 @@
 
 
 <script>
-import NavTabs from "./../components/NavTabs";
 import restaurantsAPI from "./../apis/restaurants";
 import VueSlickCarousel from "vue-slick-carousel";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
@@ -134,21 +127,18 @@ import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 import { Toast } from "./../utils/helpers";
 
 const settings = {
-  arrows: true,
   dots: true,
+  focusOnSelect: true,
   infinite: true,
-  slidesToShow: 3,
-  slidesToScroll: 1,
-  autoplay: true,
-  speed: 1000,
-  autoplaySpeed: 1000,
-  cssEase: "linear",
+  speed: 500,
+  slidesToShow: 4,
+  slidesToScroll: 3,
+  touchThreshold: 5,
 };
 
 export default {
   name: "toprestaurant",
   components: {
-    NavTabs,
     VueSlickCarousel,
   },
   data() {
@@ -248,7 +238,18 @@ button.slick-next:before {
   border: solid red;
 }
 
-.slider-item {
-  border: solid green;
+.card-img {
+  object-fit: cover;
+}
+
+.restaurants-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.toprestaurant-img {
+  border-radius: 10%;
+  width: 100%;
+  height: 100%;
 }
 </style>

@@ -1,84 +1,35 @@
 <template>
-  <div class="slider-wrapper">
-    <div class="slider-title">
-      <h1>Restaurant Categories</h1>
-    </div>
+  <div class="container py-5">
+    <h1 class="mt-5">Restaurant Categories</h1>
 
-    <div class="slider">
-      <VueSlickCarousel v-bind="settings">
-        <div
-          v-for="category in categories"
-          :key="category.id"
-          class="slider-item"
-        >
-          <router-link
-            class="nav-link"
-            :to="{ name: 'restaurants', query: { categoryId: category.id } }"
+    <hr />
+    <div class="slider-wrapper">
+      <div class="slider">
+        <VueSlickCarousel v-bind="settings">
+          <div
+            v-for="category in categories"
+            :key="category.id"
+            class="slider-item"
           >
-            <img
-              class="card-img-top"
-              src="https://images.unsplash.com/photo-1582169296194-e4d644c48063?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2103&q=80"
-              alt="Card image cap"
-              width="250px"
-              height="210px"
-            />
-          </router-link>
+            <router-link
+              class="nav-link"
+              :to="{ name: 'restaurants', query: { categoryId: category.id } }"
+            >
+              <img
+                class="card-img-top slider-img"
+                src="https://images.unsplash.com/photo-1582169296194-e4d644c48063?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2103&q=80"
+                alt="Card image cap"
+              />
+            </router-link>
 
-          <div class="slideritem-text">
-            <h3 class="card-title text-white">{{ category.name }}</h3>
+            <div class="slideritem-text">
+              <h3 class="card-title category-text text-white">
+                {{ category.name }}
+              </h3>
+            </div>
           </div>
-        </div>
-
-        <div class="slider-item">
-          <img
-            class="card-img-top"
-            src="https://images.unsplash.com/photo-1582169296194-e4d644c48063?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2103&q=80"
-            alt="Card image cap"
-            width="250px"
-            height="210px"
-          />
-
-          <div class="slideritem-text">
-            <h3 class="card-title text-white">墨西哥料理</h3>
-          </div>
-        </div>
-        <div>
-          <img
-            class="card-img-top"
-            src="https://images.unsplash.com/photo-1586540480250-e3a0717298b8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-            alt="Card image cap"
-            width="250px"
-            height="210px"
-          />
-        </div>
-        <div class="slider-item">
-          <img
-            class="card-img-top"
-            src="https://images.unsplash.com/photo-1565941072372-0f0f10c8b7dd?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80"
-            alt="Card image cap"
-            width="250px"
-            height="210px"
-          />
-        </div>
-        <div class="slider-item">
-          <img
-            class="card-img-top"
-            src="https://images.unsplash.com/photo-1525648199074-cee30ba79a4a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-            alt="Card image cap"
-            width="250px"
-            height="210px"
-          />
-        </div>
-        <div class="slider-item">
-          <img
-            class="card-img-top"
-            src="https://images.unsplash.com/photo-1525648199074-cee30ba79a4a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-            alt="Card image cap"
-            width="250px"
-            height="210px"
-          />
-        </div>
-      </VueSlickCarousel>
+        </VueSlickCarousel>
+      </div>
     </div>
   </div>
 </template>
@@ -150,7 +101,7 @@ export default {
 };
 </script> 
 
-<style>
+<style >
 button.slick-prev:before,
 button.slick-next:before {
   background-color: grey !important;
@@ -158,7 +109,8 @@ button.slick-next:before {
 }
 
 .slider {
-  width: 80%;
+  width: 70%;
+  height: 80%;
 }
 
 .slider-wrapper {
@@ -179,16 +131,30 @@ button.slick-next:before {
   position: absolute;
   font-weight: 700;
   top: 50%;
-  left: 30%;
+  left: 25%;
 
   z-index: 99;
 }
-
 .slick-list {
-  margin: 0 -5px;
+  margin: 0 -3px;
 }
 .slick-slide > div {
   padding: 0 5px;
+}
+.slider-img {
+  width: 100%;
+  height: 180px;
+  border-radius: 5%;
+  object-fit: cover;
+}
+
+.nav-link {
+  padding: 0 0;
+}
+
+.category-text {
+  font-weight: 600;
+  font-size: 1.5rem;
 }
 </style>
 

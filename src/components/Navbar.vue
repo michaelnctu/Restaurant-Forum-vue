@@ -58,6 +58,6 @@ export default {
   font-size: 2rem;
 }
 .navbar {
-  background-color: white;
+  background-color: #fffdf9;
 }
 </style>

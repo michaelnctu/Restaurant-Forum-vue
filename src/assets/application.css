@@ -10,12 +10,16 @@
   outline: none;
 }
 
-a {
+a, .list-group-item {
   color: #bd2333;
   transition: all 0.3s ease-in-out;
 }
 
 a:hover {
+  color: #bd2333;
+}
+
+.list-group-item:hover {
   color: #bd2333;
 }
 
@@ -69,6 +73,14 @@ a:hover {
   background: transparent;
 }
 
+.list-group-item .active{
+  color: #fff;
+  background-color: #bd2333;
+  border-color: #bd2333;
+  
+}
+
+
 .btn-primary.disabled, .btn-primary:disabled {
   color: #fff;
   background-color: #bd2333;
@@ -93,7 +105,7 @@ h1,
 
 .badge.badge-secondary {
   color: inherit;
-  background-color: #e8e8e8;
+  background-color: #FCF6EE;
   padding: 6px;
   font-size: 12.5px;
 }
@@ -127,3 +139,4 @@ h1,
   box-shadow: none;
   border: 1px solid #dadada;
 }
+

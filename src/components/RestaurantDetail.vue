@@ -5,7 +5,8 @@
       <img
         class="img-responsive"
         :src="restaurant.image"
-        style="width: 100%; height: 200px; margin-bottom: 25px"
+        style="width: 100%; height: 200px; margin-bottom: 25px
+        object-fit:cover"
       />
       <h1>{{ restaurant.name }}</h1>
       <p class="badge badge-secondary mt-1 mb-3">

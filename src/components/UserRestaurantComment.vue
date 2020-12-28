@@ -1,23 +1,15 @@
 <template>
-  <div>
+  <div class="comment-container">
     <h2 class="my-4">所有評論：</h2>
 
-    <div v-for="comment in restcommentsProp" :key="comment.id">
+    <div v-for="comment in Comments" :key="comment.id">
       <blockquote class="blockquote mb-0">
-        <button
-          v-if="currentUser.isAdmin"
-          type="button"
-          class="btn btn-danger float-right"
-          @click.stop.prevent="handleDeleteButtonClick(comment.id)"
-        >
-          Delete
-        </button>
         <div class="user">
           <div class="avatar">
-            <img :src="comment.User.image" class="user-img" alt="" />
+            <img :src="user.image" class="user-img" alt="" />
           </div>
           <h3 class="username">
-            <a href="#"> {{ comment.User.name }}</a>
+            <a href="#"> @ {{ comment.Restaurant.name }}</a>
             <span href="#"
               >-{{ comment.createdAt | fromNow }}
               <i class="fab fa-fort-awesome-alt"></i>
@@ -55,11 +47,11 @@ export default {
       return moment(datetime).fromNow();
     },
   },
-
+  name: "UserReview",
   //dummyData經過methods後傳到prop
   props: {
-    restcommentsProp: {
-      type: Array,
+    user: {
+      type: Object,
       required: true,
     },
   },
@@ -67,6 +59,8 @@ export default {
   data() {
     return {
       currentUser: dummyUser.currentUser,
+      Comments: this.user.Comments,
+      User: this.user,
     };
   },
   methods: {
@@ -80,7 +74,7 @@ export default {
 };
 </script>
 
-<style >
+<style scoped>
 .user {
   width: 250px;
   height: auto;

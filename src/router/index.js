@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import notFound from '../views/notFound.vue'
 import Signin from '../views/Signin.vue'
 import Restaurants from '../views/Restaurants.vue'
+import Home from './../views/Home.vue'
 import AdminRestaurant from '../views/AdminRestaurant.vue'
 import AdminRestaurants from '../views/AdminRestaurants.vue'
 import store from '../store'
@@ -14,6 +15,11 @@ const routes = [
   {
     path: '/',
     name: 'root',
+    redirect: '/signin'
+  },
+  {
+    path: '/trial',
+    name: 'trial',
     redirect: '/signin'
   },
   {
@@ -29,8 +35,13 @@ const routes = [
   },
   {
     path: '/restaurants',
-    name: 'restaurants',
+    name: 'Restaurants',
     component: Restaurants
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: Home
   },
   {
     path: '/admin',
@@ -88,6 +99,11 @@ const routes = [
     path: '/admin/restaurants/:id/edit',
     name: 'admin-restaurant-edit',
     component: () => import('../views/AdminRestaurantEdit.vue')
+  },
+  {
+    path: '/users/:id',
+    name: 'user',
+    component: () => import('../views/User.vue')
   },
   {
     path: '/users/:id/edit',

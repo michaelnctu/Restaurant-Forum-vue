@@ -1,4 +1,3 @@
-
 <template>
   <section>
     <div>
@@ -9,27 +8,8 @@
       <NavTabs />
       <Categories />
       <RestaurantsTop />
-
       <!-- 餐廳類別標籤 RestaurantsNavPills -->
       <RestaurantsNavPills :cate="categories" />
-      <!-- 餐廳 -->
-      <div class="row">
-        <!-- 餐廳卡片 RestaurantCard-->
-        <!-- initial-restaurant是為了區分情況,因為之後有like favorite等會改變 -->
-        <RestaurantCard
-          v-for="restaurant in restaurants"
-          :key="restaurant.id"
-          :initial-restaurant="restaurant"
-        />
-      </div>
-
-      <!-- 分頁標籤 RestaurantPagination -->
-      <RestaurantPagination
-        :currentPage="currentPage"
-        :total-page="totalPage"
-        :previous-page="previousPage"
-        :next-page="nextPage"
-      />
     </div>
   </section>
 </template>
@@ -38,9 +18,9 @@
 import Banner from "./../components/imageBanner";
 import NavTabs from "./../components/NavTabs";
 import Categories from "./../components/Categories";
-import RestaurantCard from "./../components/RestaurantCard";
+
 import RestaurantsNavPills from "./../components/RestaurantsNavPills";
-import RestaurantPagination from "./../components/RestaurantPagination";
+
 import restaurantApi from "./../apis/restaurants";
 import { Toast } from "./../utils/helpers";
 import RestaurantsTop from "./RestaurantsTop";
@@ -51,9 +31,8 @@ export default {
     RestaurantsTop,
     Banner,
     NavTabs,
-    RestaurantCard,
     RestaurantsNavPills,
-    RestaurantPagination,
+
     Categories,
   },
   data() {
