@@ -1,11 +1,10 @@
 <template>
   <div class="container py-5">
     <h1 class="mt-5">Restaurant Categories</h1>
-
     <hr />
     <div class="slider-wrapper">
       <div class="slider">
-        <VueSlickCarousel v-bind="settings">
+        <VueSlickCarousel v-bind="settings" v-if="categories.length !== 0">
           <div
             v-for="category in categories"
             :key="category.id"
@@ -17,7 +16,7 @@
             >
               <img
                 class="card-img-top slider-img"
-                src="https://images.unsplash.com/photo-1582169296194-e4d644c48063?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2103&q=80"
+                :src="category.image"
                 alt="Card image cap"
               />
             </router-link>
@@ -39,54 +38,16 @@ import VueSlickCarousel from "vue-slick-carousel";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
 // optional style for arrows & dots
 import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
+import cateAPI from "./../apis/categories";
+import { Toast } from "./../utils/helpers";
 const settings = {
   dots: true,
   infinite: true,
   initialSlide: 2,
   speed: 500,
-  slidesToShow: 4,
+  slidesToShow: 6,
   slidesToScroll: 1,
   swipeToSlide: true,
-};
-const dummyCategories = {
-  categories: [
-    {
-      id: 2,
-      name: "日本料理",
-      createdAt: "2020-12-15T06:35:43.000Z",
-      updatedAt: "2020-12-15T06:35:43.000Z",
-    },
-    {
-      id: 3,
-      name: "義大利料理",
-      createdAt: "2020-12-15T06:35:43.000Z",
-      updatedAt: "2020-12-15T06:35:43.000Z",
-    },
-    {
-      id: 4,
-      name: "墨西哥料理",
-      createdAt: "2020-12-15T06:35:43.000Z",
-      updatedAt: "2020-12-15T06:35:43.000Z",
-    },
-    {
-      id: 5,
-      name: "素食料理",
-      createdAt: "2020-12-15T06:35:43.000Z",
-      updatedAt: "2020-12-15T06:35:43.000Z",
-    },
-    {
-      id: 6,
-      name: "美式料理",
-      createdAt: "2020-12-15T06:35:43.000Z",
-      updatedAt: "2020-12-15T06:35:43.000Z",
-    },
-    {
-      id: 7,
-      name: "複合式料理",
-      createdAt: "2020-12-15T06:35:43.000Z",
-      updatedAt: "2020-12-15T06:35:43.000Z",
-    },
-  ],
 };
 
 export default {
@@ -95,8 +56,35 @@ export default {
   data() {
     return {
       settings,
-      categories: dummyCategories.categories,
+      categories: [],
     };
+  },
+
+  created() {
+    this.fetchCategories();
+  },
+
+  methods: {
+    async fetchCategories() {
+      // 在每一個 category 中都添加一個 isEditing 屬性
+      try {
+        const { data } = await cateAPI.getCategories();
+        if (data.status === "error") {
+          throw new Error(data.message);
+        }
+        this.categories = data.categories.map((category) => ({
+          ...category,
+          isEditing: false,
+          nameCached: "", //資料暫存
+        }));
+      } catch (error) {
+        console.log("error", error);
+        Toast.fire({
+          icon: "error",
+          title: "無法取得類別",
+        });
+      }
+    },
   },
 };
 </script> 
@@ -109,7 +97,7 @@ button.slick-next:before {
 }
 
 .slider {
-  width: 70%;
+  width: 100%;
   height: 80%;
 }
 

@@ -9,7 +9,6 @@
       <Categories />
       <RestaurantsTop />
       <!-- 餐廳類別標籤 RestaurantsNavPills -->
-      <RestaurantsNavPills :cate="categories" />
     </div>
   </section>
 </template>
@@ -18,8 +17,6 @@
 import Banner from "./../components/imageBanner";
 import NavTabs from "./../components/NavTabs";
 import Categories from "./../components/Categories";
-
-import RestaurantsNavPills from "./../components/RestaurantsNavPills";
 
 import restaurantApi from "./../apis/restaurants";
 import { Toast } from "./../utils/helpers";
@@ -31,8 +28,6 @@ export default {
     RestaurantsTop,
     Banner,
     NavTabs,
-    RestaurantsNavPills,
-
     Categories,
   },
   data() {
