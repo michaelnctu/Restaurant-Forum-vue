@@ -93,7 +93,7 @@ export default {
 
 <style scoped>
 .followers {
-  height: 300px;
+  height: auto;
   z-index: 99;
 }
 

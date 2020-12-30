@@ -5,7 +5,6 @@
     </div>
 
     <div class="container py-5">
-      <NavTabs />
       <Categories />
       <RestaurantsTop />
       <!-- 餐廳類別標籤 RestaurantsNavPills -->
@@ -15,7 +14,7 @@
 
 <script>
 import Banner from "./../components/imageBanner";
-import NavTabs from "./../components/NavTabs";
+
 import Categories from "./../components/Categories";
 
 import restaurantApi from "./../apis/restaurants";
@@ -27,7 +26,7 @@ export default {
   components: {
     RestaurantsTop,
     Banner,
-    NavTabs,
+
     Categories,
   },
   data() {

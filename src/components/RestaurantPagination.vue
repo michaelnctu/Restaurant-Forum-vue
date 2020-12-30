@@ -26,7 +26,7 @@
       >
         <router-link
           class="page-link"
-          :to="{ name: 'restaurants', query: { categoryId, page } }"
+          :to="{ path: '/restaurants', query: { categoryId, page } }"
         >
           {{ page }}
         </router-link>
@@ -74,3 +74,10 @@ export default {
   },
 };
 </script>
+
+
+<style scoped>
+.active {
+  background-color: red;
+}
+</style>

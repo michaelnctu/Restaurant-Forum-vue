@@ -15,12 +15,7 @@ const routes = [
   {
     path: '/',
     name: 'root',
-    redirect: '/signin'
-  },
-  {
-    path: '/trial',
-    name: 'trial',
-    redirect: '/signin'
+    redirect: '/home'
   },
   {
     path: '/signin',
@@ -101,6 +96,13 @@ const routes = [
     component: () => import('../views/AdminRestaurantEdit.vue')
   },
   {
+    path: '/users/top',
+    name: 'users-top',
+    component: () => import('../views/UsersTop.vue')
+  },
+
+
+  {
     path: '/users/:id',
     name: 'user',
     component: () => import('../views/User.vue')
@@ -109,11 +111,6 @@ const routes = [
     path: '/users/:id/edit',
     name: 'users-edit',
     component: () => import('../views/UserEdit.vue')
-  },
-  {
-    path: '/users/top',
-    name: 'users-top',
-    component: () => import('../views/UsersTop.vue')
   },
   {
     path: '*',

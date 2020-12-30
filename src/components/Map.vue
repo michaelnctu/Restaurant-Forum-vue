@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "Restaurants",
+  name: "RestaurantsMap",
   data() {
     return {
       map: null,

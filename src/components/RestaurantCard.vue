@@ -5,8 +5,7 @@
         class="card-img-top"
         :src="restaurant.image"
         alt="Card image cap"
-        width="286px"
-        height="270px"
+        style="width=286px ;height=300px"
       />
 
       <div class="card-body">
@@ -176,8 +175,8 @@ export default {
 </script>
 
 
-<style >
-.allcard {
-  border: solid green;
+<style scoped>
+.card-img-top {
+  height: 270px;
 }
 </style>

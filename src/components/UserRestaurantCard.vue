@@ -3,8 +3,8 @@
     <div
       v-for="restaurant in restaurants"
       :key="restaurant.id"
-      class="card card-frame col-sm"
-      style="width: 17rem; height: 25rem"
+      class="card card-frame col-4"
+      style="width: 17rem; height: auto"
     >
       <img
         class="card-img-top"
@@ -25,14 +25,6 @@
           {{ restaurant.description }}
         </p>
       </div>
-
-      <!-- <span class="badge badge-secondary">{{
-          restaurant.Category.name
-        }}</span>
-        <p class="card-text text-truncate">
-          {{ restaurant.description }}
-        </p>
-      </div> -->
     </div>
   </div>
 </template>
@@ -42,6 +34,7 @@ import usersAPI from "./../apis/users";
 import { Toast } from "./../utils/helpers";
 
 export default {
+  name: "user-REVIEW",
   props: {
     //from 父層來的
     user: {

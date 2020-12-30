@@ -97,7 +97,7 @@ export default {
         this.$store.commit("setCurrentUser", data.user);
 
         // 成功登入後進行轉址
-        this.$router.push("/restaurants");
+        this.$router.push("/home");
       } catch (error) {
         console.log("error", error);
         this.isProcessing = false; //登入失敗後submit按鈕還原

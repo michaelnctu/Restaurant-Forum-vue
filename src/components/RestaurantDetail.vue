@@ -36,6 +36,7 @@
             </li>
           </ul>
         </div>
+
         <div class="col-6">
           <div class="google-map" id="map"></div>
         </div>
@@ -97,8 +98,6 @@ export default {
       restaurant: this.restdetailProp,
       map: null,
       // 預設經緯度在信義區附近
-      lat: 25.0325917,
-      lng: 121.5624999,
       markers: [],
     };
   },
@@ -215,7 +214,8 @@ export default {
       // 透過 Map 物件建構子建立新地圖 map 物件實例，並將地圖呈現在 id 為 map 的元素中
       this.map = new google.maps.Map(document.getElementById("map"), {
         // 設定地圖的中心點經緯度位置
-        center: { lat: this.lat, lng: this.lng },
+
+        center: { lat: this.restaurant.lat, lng: this.restaurant.lng },
         // 設定地圖縮放比例 0-20
         zoom: 15,
         // 限制使用者能縮放地圖的最大比例
@@ -234,7 +234,7 @@ export default {
       // 建立一個新地標
       const marker = new google.maps.Marker({
         // 設定地標的座標
-        position: { lat: this.lat, lng: this.lng },
+        position: { lat: this.restaurant.lat, lng: this.restaurant.lng },
         // 設定地標要放在哪一個地圖
         map: this.map,
       });

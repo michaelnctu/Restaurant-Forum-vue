@@ -7,7 +7,7 @@
         人氣餐廳
 
         <button class="btn more-products" @click="moreRestaurants">
-          更多在地行程
+          更多餐廳
         </button>
       </h1>
 
@@ -34,6 +34,13 @@
             />
           </router-link>
           <div class="card-body">
+            <p class="card-text title-wrap">
+              <router-link
+                :to="{ name: 'restaurant', params: { id: restaurant.id } }"
+                >{{ restaurant.name }}</router-link
+              >
+            </p>
+
             <span class="badge badge-secondary"
               >收藏數：{{ restaurant.viewCounts }}</span
             >

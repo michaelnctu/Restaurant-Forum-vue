@@ -1,20 +1,22 @@
 <template>
   <div class="container py-5">
-    <Navbar />
-    <NavTabs />
-
-    <template>
-      <h1 class="mt-5">最新動態</h1>
+    <Spinner v-if="isLoading" />
+    <template v-else>
+      <h1 class="mt-7">最新動態</h1>
       <hr />
+      <br />
+
       <div class="row">
         <div class="col-md-6">
           <h3>最新餐廳</h3>
+          <br />
           <!-- 最新餐廳 NewestRestaurants -->
-          <NewestRestaurants :Restaurants="restaurants" />
+          <NewestRestaurants :restaurants="restaurants" />
         </div>
         <div class="col-md-6">
           <!-- 最新評論 NewestComments-->
           <h3>最新評論</h3>
+          <br />
           <NewestComments :comments="comments" />
         </div>
       </div>
@@ -22,19 +24,16 @@
   </div>
 </template>
 
+
 <script>
-import NavTabs from "./../components/NavTabs";
-import Navbar from "./../components/Navbar";
 import NewestRestaurants from "./../components/NewestRestaurants";
 import NewestComments from "./../components/NewestComments";
-import feedsApi from "./../apis/restaurants";
+import restaurantsAPI from "./../apis/restaurants";
 import { Toast } from "./../utils/helpers";
 
 export default {
   name: "restaurantFeeds",
   components: {
-    Navbar,
-    NavTabs,
     NewestRestaurants,
     NewestComments,
   },
@@ -51,11 +50,10 @@ export default {
   methods: {
     async fetchFeeds() {
       try {
-        // const response = await feedsApi.getRestauratnsfeeds();
-        // console.log("response", response);
-        const { data } = await feedsApi.getRestauratnsfeeds();
+        const { data } = await restaurantsAPI.getRestaurantsfeeds();
         console.log("response", { data });
         const { restaurants, comments } = data;
+
         this.restaurants = restaurants;
         this.comments = comments.filter(
           (comment) => comment.Restaurant && comment.text
@@ -70,3 +68,4 @@ export default {
     },
   },
 };
+</script>

@@ -24,6 +24,7 @@
 
 <script>
 import moment from "moment";
+
 export default {
   name: "newestComments",
   props: {
@@ -33,7 +34,10 @@ export default {
     },
   },
   filters: {
-    fromNow(datetime) {},
+    fromNow(datetime) {
+      if (!datetime) return "-";
+      return moment(datetime).fromNow();
+    },
   },
 };
 </script>

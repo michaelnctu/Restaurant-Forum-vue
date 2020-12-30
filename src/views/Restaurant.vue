@@ -12,7 +12,10 @@
       @after-delete-comment="afterDeleteComment"
     />
 
-    <CreateComment />
+    <CreateComment
+      :restaurant-id="restaurant.id"
+      @after-create-comment="afterCreateComment"
+    />
   </div>
 </template>
 
@@ -44,6 +47,8 @@ export default {
         description: "",
         isFavorited: false,
         isLiked: false,
+        lat: 0,
+        lng: 0,
       },
       restaurantComments: [],
     };
@@ -77,9 +82,12 @@ export default {
           categoryName: data.restaurant.Category
             ? data.restaurant.Category.name
             : "未分類",
+          lat: data.restaurant.latitude,
+          lng: data.restaurant.longitude,
         };
 
         this.restaurantComments = data.restaurant.Comments;
+        console.log("data", this.restaurant);
       } catch (error) {
         Toast.fire({
           icon: "error",
@@ -89,6 +97,20 @@ export default {
     },
     afterDeleteComment(commentId) {
       console.log("afterDeleteComment", commentId);
+    },
+
+    afterCreateComment(payload) {
+      const { commentId, restaurantId, text } = payload;
+      this.restaurantComments.push({
+        id: commentId,
+        RestaurantId: restaurantId,
+        User: {
+          id: this.currentUser.id,
+          name: this.currentUser.name,
+        },
+        text,
+        createdAt: new Date(),
+      });
     },
   },
 };

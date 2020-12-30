@@ -2,14 +2,14 @@
   <div class="comment-container">
     <h2 class="my-4">所有評論：</h2>
 
-    <div v-for="comment in Comments" :key="comment.id">
-      <blockquote class="blockquote mb-0">
+    <div v-for="comment in user.Comments" :key="comment.id">
+      <div class="blockquote mb-0">
         <div class="user">
           <div class="avatar">
             <img :src="user.image" class="user-img" alt="" />
           </div>
           <h3 class="username">
-            <a href="#"> @ {{ comment.Restaurant.name }}</a>
+            <a href="#"> @ 奔牛牛排</a>
             <span href="#"
               >-{{ comment.createdAt | fromNow }}
               <i class="fab fa-fort-awesome-alt"></i>
@@ -19,7 +19,7 @@
         <br />
 
         <p>{{ comment.text }}</p>
-      </blockquote>
+      </div>
       <hr style="background-color: grey" />
     </div>
   </div>
@@ -59,8 +59,6 @@ export default {
   data() {
     return {
       currentUser: dummyUser.currentUser,
-      Comments: this.user.Comments,
-      User: this.user,
     };
   },
   methods: {

@@ -4,7 +4,11 @@
     <div class="card-body">
       <div v-for="restaurant in restaurants" :key="restaurant.id">
         <h4>
-          <a href="#">{{ restaurant.name }}</a>
+          <router-link
+            :to="{ name: 'restaurant', params: { id: restaurant.id } }"
+          >
+            {{ restaurant.name }}</router-link
+          >
           &nbsp;
           <small>{{
             restaurant.Category ? restaurant.Category.name : "未分類"
@@ -33,7 +37,7 @@ export default {
   },
   props: {
     //定義好props 就可以在樣板裡使用從父層RestaurantFeeds傳進來的資料
-    Restaurants: {
+    restaurants: {
       type: Array,
       required: true, //設定 為必填 意思是資料是必要的
     },

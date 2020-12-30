@@ -1,6 +1,6 @@
 <template>
   <div class="container py-5">
-    <h1 class="mt-5">Restaurant Categories</h1>
+    <h1 class="mt-5">餐廳類別</h1>
     <hr />
     <div class="slider-wrapper">
       <div class="slider">
@@ -12,20 +12,20 @@
           >
             <router-link
               class="nav-link"
-              :to="{ name: 'restaurants', query: { categoryId: category.id } }"
+              :to="{ path: '/restaurants', query: { categoryId: category.id } }"
             >
               <img
                 class="card-img-top slider-img"
                 :src="category.image"
                 alt="Card image cap"
               />
-            </router-link>
 
-            <div class="slideritem-text">
-              <h3 class="card-title category-text text-white">
-                {{ category.name }}
-              </h3>
-            </div>
+              <div class="slideritem-text">
+                <h3 class="card-title category-text text-white">
+                  {{ category.name }}
+                </h3>
+              </div>
+            </router-link>
           </div>
         </VueSlickCarousel>
       </div>
@@ -143,6 +143,10 @@ button.slick-next:before {
 .category-text {
   font-weight: 600;
   font-size: 1.5rem;
+}
+
+h1 {
+  font-family: "Roboto";
 }
 </style>
 

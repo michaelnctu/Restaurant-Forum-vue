@@ -24,6 +24,13 @@ export default {
     })
   },
 
+  getRestaurantsfeeds() {
+    return apiHelper.get(`/restaurants/feeds`,
+      {
+        headers: { Authorization: `Bearer ${getToken}` }
+      })
+  },
+
   addFavorite({ restaurantId }) {
     return apiHelper.post(`/favorite/${restaurantId}`, null, {
       headers: { Authorization: `Bearer ${getToken}` }
@@ -34,6 +41,19 @@ export default {
     return apiHelper.delete(`/favorite/${restaurantId}`, {
       headers: { Authorization: `Bearer ${getToken}` }
     })
+  },
+
+  createComment({ restaurantId, text }) {
+    return apiHelper.post('/comments', {
+      restaurantId,
+      text
+    },
+      {
+        headers: { Authorization: `Bearer ${getToken}` }
+      }
+
+    )
   }
+
 
 }

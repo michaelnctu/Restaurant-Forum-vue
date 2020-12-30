@@ -6,10 +6,6 @@
     </div>
 
     <div class="container py-5">
-      <NavTabs />
-      <Categories />
-      <RestaurantsTop />
-
       <!-- 餐廳類別標籤 RestaurantsNavPills -->
       <RestaurantsNavPills :cate="categories" />
       <!-- 餐廳 -->
@@ -29,6 +25,7 @@
         :total-page="totalPage"
         :previous-page="previousPage"
         :next-page="nextPage"
+        :categoryId="categoryId"
       />
     </div>
   </section>
@@ -36,25 +33,20 @@
 
 <script>
 import Banner from "./../components/imageBanner";
-import NavTabs from "./../components/NavTabs";
-import Categories from "./../components/Categories";
+
 import RestaurantCard from "./../components/RestaurantCard";
 import RestaurantsNavPills from "./../components/RestaurantsNavPills";
 import RestaurantPagination from "./../components/RestaurantPagination";
 import restaurantApi from "./../apis/restaurants";
 import { Toast } from "./../utils/helpers";
-import RestaurantsTop from "./RestaurantsTop";
 
 export default {
   name: "Restaurants",
   components: {
-    RestaurantsTop,
     Banner,
-    NavTabs,
     RestaurantCard,
     RestaurantsNavPills,
     RestaurantPagination,
-    Categories,
   },
   data() {
     //vue的資料物件
