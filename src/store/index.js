@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import userAPI from './../apis/users'
+import usersAPI from './../apis/users'
 
 Vue.use(Vuex)
+
 
 export default new Vuex.Store({
   state: {
@@ -15,7 +16,9 @@ export default new Vuex.Store({
     },
     isAuthenticated: false
   },
+  //用來修改state的方法
   mutations: {
+    //state為當前留在state狀態的資料, currentUser則為從後端抓取到的
     setCurrentUser(state, currentUser) {
       state.currentUser = {
         ...state.currentUser,
@@ -24,14 +27,22 @@ export default new Vuex.Store({
       }
       // 將使用者的登入狀態改為 true
       state.isAuthenticated = true
+      state.token = localStorage.getItem('token')
+    },
+
+    revokeAuthentication(state) {
+      state.currentUser = {}
+      state.isAuthenticated = false
+      localStorage.removeItem('token')
     }
 
   },
+  //透過api請求資料
   actions: {
     async fetchCurrentUser({ commit }) {
-
       try {
-        const { data } = await userAPI.getCurrentUser()
+        const { data } = await usersAPI.getCurrentUser()
+
         const { id, name, email, image, isAdmin } = data
 
         commit('setCurrentUser', {
@@ -41,13 +52,14 @@ export default new Vuex.Store({
           image,
           isAdmin
         })
+
+        return true
       } catch (error) {
-        console.log(error.message)
-
+        console.error(error.message)
+        commit('revokeAuthentication')
+        return false
       }
-
     }
   },
-  modules: {
-  }
+  modules: {}
 })
