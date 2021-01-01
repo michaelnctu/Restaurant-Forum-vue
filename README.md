@@ -37,11 +37,11 @@ Heroku: https://salty-oasis-94184.herokuapp.com/restaurants
 
 餐廳簡介 (圖片為隨機產生的random資料)
 
-![image](https://user-images.githubusercontent.com/65526955/103441691-a4dbd400-4c8a-11eb-9875-85248997494c.png)
+![image](https://user-images.githubusercontent.com/65526955/103442110-3d278800-4c8e-11eb-8dbd-0365c8317036.png)
 
 美食達人
 
-![image](https://user-images.githubusercontent.com/65526955/98907910-8d8a3100-24fa-11eb-8eec-180f23b9c33f.png)
+![image](https://user-images.githubusercontent.com/65526955/103442135-77912500-4c8e-11eb-87cb-bf0fe6f6ba30.png)
 
 
 # 網站功能
@@ -56,9 +56,12 @@ Heroku: https://salty-oasis-94184.herokuapp.com/restaurants
 
 前台端: 
 
-+ 使用者可以修改個人簡介,並上傳使用者圖片
 
 + 使用者可以查看其他使用者個人簡介
+
++ 使用者可以查看餐廳內容並串接Google Map API
+
++ 首頁有滑動vue slack顯示category
 
 + 使用者可以追蹤,退追蹤其他使用者
 
@@ -68,11 +71,7 @@ Heroku: https://salty-oasis-94184.herokuapp.com/restaurants
 
 + 使用者可以加入/移除餐廳至收藏清單
 
-+ 使用者可以Like/Unlike餐廳
-
 + 使用者可以評論餐廳
-
-+ 使用者可以點選"Top10人氣餐廳"查看被收藏數高的餐廳
 
 + 使用者可以點選"美食達人"查看追蹤人數高的使用者
 
