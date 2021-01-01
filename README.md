@@ -1,3 +1,21 @@
+# Restaurant-Forum
+
+Heroku backend: https://salty-oasis-94184.herokuapp.com//api
+
+# 網站畫面
+
+首頁
+
+![image](https://user-images.githubusercontent.com/65526955/103441801-46fbbc00-4c8b-11eb-902d-9ca7d6f2969a.png)
+
+餐廳簡介 (圖片為隨機產生的random資料)
+
+![image](https://user-images.githubusercontent.com/65526955/103442110-3d278800-4c8e-11eb-8dbd-0365c8317036.png)
+
+美食達人
+
+![image](https://user-images.githubusercontent.com/65526955/103442135-77912500-4c8e-11eb-87cb-bf0fe6f6ba30.png)
+
 # forum-front-end-vue
 
 ## Project setup
@@ -22,27 +40,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
-
-
-
-# Restaurant-Forum
-
-Heroku: https://salty-oasis-94184.herokuapp.com/restaurants
-
-# 網站畫面
-
-首頁
-
-![image](https://user-images.githubusercontent.com/65526955/103441801-46fbbc00-4c8b-11eb-902d-9ca7d6f2969a.png)
-
-餐廳簡介 (圖片為隨機產生的random資料)
-
-![image](https://user-images.githubusercontent.com/65526955/103442110-3d278800-4c8e-11eb-8dbd-0365c8317036.png)
-
-美食達人
-
-![image](https://user-images.githubusercontent.com/65526955/103442135-77912500-4c8e-11eb-87cb-bf0fe6f6ba30.png)
-
 
 # 網站功能
 
