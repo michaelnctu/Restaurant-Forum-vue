@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg fixed-top">
-    <router-link class="navbar-brand" to="/"> MealFresh </router-link>
+    <router-link class="navbar-brand" to="/home"> MealFresh </router-link>
     <button
       class="navbar-toggler"
       type="button"
@@ -23,16 +23,17 @@
         >
           管理員後台
         </router-link>
-
-        <!-- is user is login -->
-        <router-link to="#" class="text-dark mr-3"> 使用者 您好 </router-link>
-        <button
-          type="button"
-          class="btn btn-sm btn-outline-success my-2 my-sm-0"
-          @click="logout"
-        >
-          登出
-        </button>
+        <template v-if="isAuthenticated">
+          <!-- is user is login -->
+          <router-link to="#" class="text-dark mr-3"> 使用者 您好 </router-link>
+          <button
+            type="button"
+            class="btn btn-sm btn-outline-success my-2 my-sm-0"
+            @click="logout"
+          >
+            登出
+          </button>
+        </template>
       </div>
     </div>
   </nav>
@@ -54,7 +55,7 @@ export default {
   methods: {
     logout() {
       this.$store.commit("revokeAuthentication");
-      this.$route.push("/signin");
+      this.$router.push("/signin");
     },
   },
 };
