@@ -1,3 +1,21 @@
+# Restaurant-Forum
+
+Heroku backend: https://salty-oasis-94184.herokuapp.com//api
+
+# 網站畫面
+
+首頁
+
+![image](https://user-images.githubusercontent.com/65526955/103441801-46fbbc00-4c8b-11eb-902d-9ca7d6f2969a.png)
+
+餐廳簡介 (圖片為隨機產生的random資料)
+
+![image](https://user-images.githubusercontent.com/65526955/103442110-3d278800-4c8e-11eb-8dbd-0365c8317036.png)
+
+美食達人
+
+![image](https://user-images.githubusercontent.com/65526955/103442135-77912500-4c8e-11eb-87cb-bf0fe6f6ba30.png)
+
 # forum-front-end-vue
 
 ## Project setup
@@ -23,27 +41,6 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-
-
-# Restaurant-Forum
-
-Heroku: https://salty-oasis-94184.herokuapp.com/restaurants
-
-# 網站畫面
-
-首頁
-
-![image](https://user-images.githubusercontent.com/65526955/98906652-734f5380-24f8-11eb-807e-ce8215f6eaf6.png)
-
-餐廳簡介 (圖片為隨機產生的random資料)
-
-![image](https://user-images.githubusercontent.com/65526955/98907225-74cd4b80-24f9-11eb-9935-e87c80cdf0ab.png)
-
-美食達人
-
-![image](https://user-images.githubusercontent.com/65526955/98907910-8d8a3100-24fa-11eb-8eec-180f23b9c33f.png)
-
-
 # 網站功能
 
 後台端: 
@@ -56,9 +53,12 @@ Heroku: https://salty-oasis-94184.herokuapp.com/restaurants
 
 前台端: 
 
-+ 使用者可以修改個人簡介,並上傳使用者圖片
 
 + 使用者可以查看其他使用者個人簡介
+
++ 使用者可以查看餐廳內容並串接Google Map API
+
++ 首頁有滑動vue slack顯示category
 
 + 使用者可以追蹤,退追蹤其他使用者
 
@@ -68,11 +68,7 @@ Heroku: https://salty-oasis-94184.herokuapp.com/restaurants
 
 + 使用者可以加入/移除餐廳至收藏清單
 
-+ 使用者可以Like/Unlike餐廳
-
 + 使用者可以評論餐廳
-
-+ 使用者可以點選"Top10人氣餐廳"查看被收藏數高的餐廳
 
 + 使用者可以點選"美食達人"查看追蹤人數高的使用者
 
